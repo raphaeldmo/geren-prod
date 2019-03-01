@@ -11,8 +11,9 @@ package br.team.gates.atividade280219;
  */
 public class Principal {
     public static void main(String[] args) {
-        ProdutoDAO dao = new ProdutoDAO();
-        dao.listar();
+        System.out.println("Teste Maven");
+        int i = 0;
+        System.out.println("Valor i++: " + i++);
     }
     
 }
