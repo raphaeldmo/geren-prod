@@ -9,7 +9,7 @@ package view;
  *
  * @author FGO064
  */
-public class TelaConsultaProdutos extends javax.swing.JInternalFrame {
+public class TelaConsultaProdutos extends javax.swing.JFrame {
 
     /**
      * Creates new form TelaConsultaProdutos
