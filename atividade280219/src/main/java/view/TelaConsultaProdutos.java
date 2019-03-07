@@ -30,11 +30,11 @@ public class TelaConsultaProdutos extends javax.swing.JFrame {
         labelPesquisarQuarto = new javax.swing.JLabel();
         fFieldPesquisa = new javax.swing.JTextField();
         btnBuscar = new javax.swing.JButton();
-        scrollTabelaResultados = new javax.swing.JScrollPane();
-        tabelaResultados = new javax.swing.JTable();
         buttonAlterar = new javax.swing.JButton();
         buttonExcluir = new javax.swing.JButton();
         buttonExcluir1 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
 
         labelPesquisarQuarto.setText("Pesquisar: ");
 
@@ -44,37 +44,6 @@ public class TelaConsultaProdutos extends javax.swing.JFrame {
                 btnBuscarActionPerformed(evt);
             }
         });
-
-        tabelaResultados.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Id", "Nome", "P. Compra", "P. Venda", "Quant"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, true
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        tabelaResultados.setSelectionMode();
-        tabelaResultados.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tabelaResultadosMouseClicked(evt);
-            }
-        });
-        scrollTabelaResultados.setViewportView(tabelaResultados);
 
         buttonAlterar.setText("Excluir");
         buttonAlterar.addActionListener(new java.awt.event.ActionListener() {
@@ -97,6 +66,19 @@ public class TelaConsultaProdutos extends javax.swing.JFrame {
             }
         });
 
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -110,7 +92,6 @@ public class TelaConsultaProdutos extends javax.swing.JFrame {
                         .addComponent(fFieldPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, 81, Short.MAX_VALUE))
-                    .addComponent(scrollTabelaResultados, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(buttonExcluir1, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -119,6 +100,10 @@ public class TelaConsultaProdutos extends javax.swing.JFrame {
                         .addComponent(buttonAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -128,9 +113,9 @@ public class TelaConsultaProdutos extends javax.swing.JFrame {
                     .addComponent(labelPesquisarQuarto)
                     .addComponent(btnBuscar)
                     .addComponent(fFieldPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(scrollTabelaResultados, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(34, 34, 34)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(buttonExcluir)
                     .addComponent(buttonExcluir1)
@@ -145,11 +130,6 @@ public class TelaConsultaProdutos extends javax.swing.JFrame {
 
      
     }//GEN-LAST:event_btnBuscarActionPerformed
-
-    private void tabelaResultadosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaResultadosMouseClicked
-       
-        
-    }//GEN-LAST:event_tabelaResultadosMouseClicked
 
     private void buttonAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAlterarActionPerformed
         
@@ -170,8 +150,8 @@ public class TelaConsultaProdutos extends javax.swing.JFrame {
     private javax.swing.JButton buttonExcluir;
     private javax.swing.JButton buttonExcluir1;
     private javax.swing.JTextField fFieldPesquisa;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
     private javax.swing.JLabel labelPesquisarQuarto;
-    private javax.swing.JScrollPane scrollTabelaResultados;
-    private javax.swing.JTable tabelaResultados;
     // End of variables declaration//GEN-END:variables
 }
