@@ -5,6 +5,8 @@ import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import view.TelaCadastroProdutos;
+import view.TelaConsultaProdutos;
 
 public class Main extends JFrame {
 
