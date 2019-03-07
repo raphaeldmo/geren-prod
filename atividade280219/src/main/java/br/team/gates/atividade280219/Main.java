@@ -17,8 +17,8 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        /*TelaCadastroProdutos cadastro = new TelaCadastroProdutos();
-        cadastro.setVisible(true);*/
+        TelaCadastroProdutos cadastro = new TelaCadastroProdutos();
+        cadastro.setVisible(true);
         System.out.println("OI");
     }
     
