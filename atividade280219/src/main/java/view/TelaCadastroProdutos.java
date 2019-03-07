@@ -11,7 +11,7 @@ import java.awt.Color;
  *
  * @author FGO064
  */
-public class TelaCadastroProdutos extends javax.swing.JInternalFrame {
+public class TelaCadastroProdutos extends javax.swing.JFrame {
 
     /**
      * Creates new form TelaCadastroProdutos
