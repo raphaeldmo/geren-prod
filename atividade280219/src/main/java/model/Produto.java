@@ -7,20 +7,29 @@ public class Produto {
     private int id;
     private String nome;
     private String descricao;
-    private double preco_compra;
-    private double preco_venda;
+    private double precoCompra;
+    private double precoVenda;
     private int quantidade;
     private boolean diponivel;
     private Date data_cadastro;
 
     //Construtores
-    public Produto(int pId, String pNome, String pDescricao, double pPreco_Compra,
-            double pPreco_Venda, int pQuantidade) {
+    public Produto(int pId, String pNome, String pDescricao, double pPrecoCompra,
+            double pPrecoVenda, int pQuantidade) {
         this.id = pId;
         this.nome = pNome;
         this.descricao = pDescricao;
-        this.preco_compra = pPreco_Compra;
-        this.preco_venda = pPreco_Venda;
+        this.precoCompra = pPrecoCompra;
+        this.precoVenda = pPrecoVenda;
+        this.quantidade = pQuantidade;
+    }
+    
+    public Produto(String pNome, String pDescricao, double pPrecoCompra,
+        double pPrecoVenda, int pQuantidade) {
+        this.nome = pNome;
+        this.descricao = pDescricao;
+        this.precoCompra = pPrecoCompra;
+        this.precoVenda = pPrecoVenda;
         this.quantidade = pQuantidade;
     }
 
@@ -74,28 +83,28 @@ public class Produto {
      * @return the preco_compra
      */
     public double getPreco_compra() {
-        return preco_compra;
+        return precoCompra;
     }
 
     /**
      * @param preco_compra the preco_compra to set
      */
-    public void setPreco_compra(double preco_compra) {
-        this.preco_compra = preco_compra;
+    public void setPreco_compra(double precoCompra) {
+        this.precoCompra = precoCompra;
     }
 
     /**
      * @return the preco_venda
      */
-    public double getPreco_venda() {
-        return preco_venda;
+    public double getPrecoVenda() {
+        return precoVenda;
     }
 
     /**
      * @param preco_venda the preco_venda to set
      */
-    public void setPreco_venda(double preco_venda) {
-        this.preco_venda = preco_venda;
+    public void setPrecoVenda(double precoVenda) {
+        this.precoVenda = precoVenda;
     }
 
     /**
@@ -138,6 +147,14 @@ public class Produto {
      */
     public void setData_cadastro(Date data_cadastro) {
         this.data_cadastro = data_cadastro;
+    }
+
+    public Object getPreco() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public Object getCategoria() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     

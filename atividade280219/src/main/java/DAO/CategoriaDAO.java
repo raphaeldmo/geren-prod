@@ -1,13 +1,19 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package DAO;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import model.Produto;
 
-public class ProdutoDAO 
-{
+/**
+ *
+ * @author victor.snsilva
+ */
+public class CategoriaDAO {
     
     private Connection obterConexao() throws ClassNotFoundException, SQLException {
         // 1) Declarar o driver JDBC de acordo com o Banco de dados usado
@@ -19,31 +25,6 @@ public class ProdutoDAO
                 "root",
                 "");
         return conn;
-    }
-    
-    public static boolean Salvar(Produto p)
-    {
-        
-        return true;
-    }
-    
-    public static boolean Atualizar(Produto p)
-    {
-        
-        return true;
-    }
-    
-    public static boolean Excluir(int id)
-    {
-        
-        return true;
-    }
-    
-    public static ArrayList<Produto> getProdutos() 
-    {
-        ArrayList<Produto> listaProdutos = new ArrayList<Produto>();
-        
-        return  listaProdutos;
     }
     
 }
