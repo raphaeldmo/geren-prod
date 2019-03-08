@@ -9,10 +9,6 @@ import DAO.ProdutoDAO;
 import java.util.ArrayList;
 import model.Produto;
 
-/**
- *
- * @author victor.snsilva
- */
 public class ProdutoController {
 
     public static boolean Salvar(String pNome, int pQuantidade, double pPrecoCompra, double pPrecoVenda, int pIdCategoria, String pDescricao) {
