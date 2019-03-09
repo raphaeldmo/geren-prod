@@ -1,26 +1,25 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package view;
 
+import controller.ProdutoController;
 import java.awt.Color;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author FGO064
- */
 public class TelaCadastroProdutos extends javax.swing.JFrame {
+
+    private String modoTela;
 
     /**
      * Creates new form TelaCadastroProdutos
      */
     public TelaCadastroProdutos() {
         initComponents();
+        ButtonDesabilitado();
+        //Quando ele incia, o botão esta vermelho, CERTO, porem quando clico ele n fica verde de imediato, somebody help me?
+
     }
 
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -31,11 +30,11 @@ public class TelaCadastroProdutos extends javax.swing.JFrame {
         labelQuant = new javax.swing.JLabel();
         labelDescricao = new javax.swing.JLabel();
         tgbStatus = new javax.swing.JToggleButton();
-        fieldNome = new javax.swing.JTextField();
-        fieldPCompra = new javax.swing.JTextField();
-        fieldPVenda = new javax.swing.JTextField();
-        fieldQuant = new javax.swing.JTextField();
-        fieldDescricao = new javax.swing.JTextField();
+        txtNome = new javax.swing.JTextField();
+        txtPrecoCompra = new javax.swing.JTextField();
+        txtDescricao = new javax.swing.JTextField();
+        txtPrecoVenda = new javax.swing.JTextField();
+        txtQuantidade = new javax.swing.JTextField();
         btnCancelar = new javax.swing.JButton();
         btnIncluir = new javax.swing.JButton();
 
@@ -87,15 +86,15 @@ public class TelaCadastroProdutos extends javax.swing.JFrame {
                             .addComponent(labelDescricao))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(fieldPCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(fieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtPrecoCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(fieldPVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(fieldDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(txtDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(labelPVenda)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(fieldQuant, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtPrecoVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
                 .addComponent(tgbStatus)
                 .addGap(29, 29, 29))
@@ -112,21 +111,21 @@ public class TelaCadastroProdutos extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(labelNome)
-                    .addComponent(fieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(13, 13, 13)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(labelPCompra)
-                    .addComponent(fieldPCompra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtPrecoCompra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(labelPVenda)
-                            .addComponent(fieldQuant, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtPrecoVenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                             .addComponent(labelQuant)
-                            .addComponent(fieldDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(txtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(22, 22, 22)
                         .addComponent(tgbStatus)))
@@ -136,7 +135,7 @@ public class TelaCadastroProdutos extends javax.swing.JFrame {
                         .addComponent(labelDescricao))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addComponent(fieldPVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCancelar)
@@ -148,37 +147,127 @@ public class TelaCadastroProdutos extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tgbStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tgbStatusActionPerformed
-        if(tgbStatus.isSelected()){
-            tgbStatus.setBackground(Color.red);
-            tgbStatus.setText("Desabilitar");
-        }else{
+        if (tgbStatus.isSelected()) {
             tgbStatus.setBackground(Color.green);
             tgbStatus.setText("Habilitar");
         }
+
     }//GEN-LAST:event_tgbStatusActionPerformed
 
     private void btnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIncluirActionPerformed
-        // TODO add your handling code here:
+        if (ValidarFormulario()) {
+            if (ProdutoController.Salvar(
+                    txtNome.getText(),
+                    Double.parseDouble(txtPrecoCompra.getText()),
+                    Double.parseDouble(txtPrecoVenda.getText()),
+                    Integer.parseInt(txtQuantidade.getText()),
+                    txtDescricao.getText())) {
+//                this.LoadTable();
+//                JOptionPane.showMessageDialog(null, "Produto cadastrado com sucesso!");
+//                LimparFormulario();
+//            } else {
+//                JOptionPane.showMessageDialog(null, "Falha ao cadastrar o produto!");
+                //@Victor, HELP!!! hahaha
+            }
+
+        }
+
     }//GEN-LAST:event_btnIncluirActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        // TODO add your handling code here:
+        LimparFormulario();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnIncluir;
-    private javax.swing.JTextField fieldDescricao;
-    private javax.swing.JTextField fieldNome;
-    private javax.swing.JTextField fieldPCompra;
-    private javax.swing.JTextField fieldPVenda;
-    private javax.swing.JTextField fieldQuant;
     private javax.swing.JLabel labelDescricao;
     private javax.swing.JLabel labelNome;
     private javax.swing.JLabel labelPCompra;
     private javax.swing.JLabel labelPVenda;
     private javax.swing.JLabel labelQuant;
     private javax.swing.JToggleButton tgbStatus;
+    private javax.swing.JTextField txtDescricao;
+    private javax.swing.JTextField txtNome;
+    private javax.swing.JTextField txtPrecoCompra;
+    private javax.swing.JTextField txtPrecoVenda;
+    private javax.swing.JTextField txtQuantidade;
     // End of variables declaration//GEN-END:variables
+/**
+     *
+     * @return boolean - true: formulário válido, false: formulário inválido
+     */
+    private boolean ValidarFormulario() {
+
+        if (this.txtNome.getText().equalsIgnoreCase("")) {
+            JOptionPane.showMessageDialog(this, "Defina um nome para o produto!");
+            return false;
+        }
+
+        try {
+            if (this.txtQuantidade.getText().equalsIgnoreCase("")) {
+                JOptionPane.showMessageDialog(null, "Defina a quantidade em estoque do produto!");
+                return false;
+            }
+            Integer.parseInt(txtQuantidade.getText());
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Digite apenas números inteiros para a quantidade em estoque");
+            return false;
+        } finally {
+
+        }
+
+        try {
+            if (txtPrecoCompra.getText().equals("")) {
+                JOptionPane.showMessageDialog(null, "Coloque o preço do produto!");
+                return false;
+            }
+            Double.parseDouble(txtPrecoCompra.getText());
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Digite apenas valores decimais para o preço do produto. Ex:500.50");
+            return false;
+        } finally {
+
+        }
+        try {
+            if (txtPrecoVenda.getText().equals("")) {
+                JOptionPane.showMessageDialog(null, "Defina um preço para produto!");
+                return false;
+            }
+            Double.parseDouble(txtPrecoVenda.getText());
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Digite apenas valores decimais para o preço do produto. Ex:500.50");
+            return false;
+        } finally {
+
+        }
+        if (this.txtDescricao.getText().equalsIgnoreCase("")) {
+            JOptionPane.showMessageDialog(this, "Defina uma descrição para produto!");
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * limpa formulário após ação
+     */
+    private void LimparFormulario() {
+        txtNome.setText("");
+        txtQuantidade.setText("");
+        txtPrecoCompra.setText("");
+        txtPrecoVenda.setText("");
+        txtDescricao.setText("");
+    }
+    
+    private void ButtonDesabilitado(){
+        if(!tgbStatus.isSelected())
+        tgbStatus.setBackground(Color.red);
+        tgbStatus.setText("Desabilitar");
+    }
+
 }

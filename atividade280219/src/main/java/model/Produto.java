@@ -24,13 +24,13 @@ public class Produto {
         this.quantidade = pQuantidade;
     }
     
-    public Produto(String pNome, String pDescricao, double pPrecoCompra,
-        double pPrecoVenda, int pQuantidade) {
+    public Produto(String pNome, double pPrecoCompra,
+        double pPrecoVenda, int pQuantidade, String pDescricao) {
         this.nome = pNome;
-        this.descricao = pDescricao;
         this.precoCompra = pPrecoCompra;
         this.precoVenda = pPrecoVenda;
         this.quantidade = pQuantidade;
+        this.descricao = pDescricao;
     }
 
     public Produto() {
@@ -82,14 +82,14 @@ public class Produto {
     /**
      * @return the preco_compra
      */
-    public double getPreco_compra() {
+    public double getPrecoCompra() {
         return precoCompra;
     }
 
     /**
-     * @param preco_compra the preco_compra to set
+     * @param precoCompra the precoCompra to set
      */
-    public void setPreco_compra(double precoCompra) {
+    public void setPrecoCompra(double precoCompra) {
         this.precoCompra = precoCompra;
     }
 
@@ -101,7 +101,7 @@ public class Produto {
     }
 
     /**
-     * @param preco_venda the preco_venda to set
+     * @param precoVenda the precoVenda to set
      */
     public void setPrecoVenda(double precoVenda) {
         this.precoVenda = precoVenda;

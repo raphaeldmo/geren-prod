@@ -11,10 +11,11 @@ import model.Produto;
 
 public class ProdutoController {
 
-    public static boolean Salvar(String pNome, int pQuantidade, double pPrecoCompra, double pPrecoVenda, int pIdCategoria, String pDescricao) {
-        Produto p = new Produto(pNome, pDescricao, pPrecoCompra, pPrecoVenda, pQuantidade);
+    public static boolean Salvar(String pNome, double pPrecoCompra, double pPrecoVenda, int pQuantidade, String pDescricao) {
+        Produto p = new Produto(pNome, pPrecoCompra, pPrecoVenda, pQuantidade, pDescricao);
         return ProdutoDAO.Salvar(p);
     }
+    
 
     public static boolean Excluir(int id) {
         return ProdutoDAO.Excluir(id);
@@ -28,9 +29,9 @@ public class ProdutoController {
             listaProdutos.add(
                     new String[]{String.valueOf(produtos.get(i).getId()),
                         produtos.get(i).getNome(),
+                        String.valueOf(produtos.get(i).getPrecoCompra()),
+                        String.valueOf(produtos.get(i).getPrecoVenda()),
                         String.valueOf(produtos.get(i).getQuantidade()),
-                        String.valueOf(produtos.get(i).getPreco()),
-                        String.valueOf(produtos.get(i).getCategoria()),
                         String.valueOf(produtos.get(i).getDescricao())
                     });
 
