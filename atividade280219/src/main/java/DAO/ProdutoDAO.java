@@ -2,6 +2,8 @@ package DAO;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import model.Produto;
@@ -9,7 +11,7 @@ import model.Produto;
 public class ProdutoDAO 
 {
     
-    private Connection obterConexao() throws ClassNotFoundException, SQLException {
+    private static Connection obterConexao() throws ClassNotFoundException, SQLException {
         // 1) Declarar o driver JDBC de acordo com o Banco de dados usado
         Class.forName("com.mysql.cj.jdbc.Driver");
         
@@ -39,11 +41,28 @@ public class ProdutoDAO
         return true;
     }
     
-    public static ArrayList<Produto> getProdutos() 
+    public static ArrayList<Produto> getProdutos()
     {
         ArrayList<Produto> listaProdutos = new ArrayList<Produto>();
+        String query = "SELECT * FROM produto";
         
-        return  listaProdutos;
+        try (Connection conn = obterConexao();
+                PreparedStatement stmt = conn.prepareStatement(query);
+                ResultSet resultados = stmt.executeQuery()) {
+            while (resultados.next()) {
+                // TRATAR RESULTADOS
+                int id = resultados.getInt("id");
+                String nome = resultados.getString("nome");
+                System.out.println("id: " + id + ", nome: " + nome);  
+            }
+                
+        }catch(SQLException ex) {
+            ex.printStackTrace();
+        } catch(ClassNotFoundException ex) {
+            ex.printStackTrace();
+        }
+        
+        return listaProdutos;
     }
     
 }

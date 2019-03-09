@@ -5,6 +5,10 @@
  */
 package view;
 
+import controller.ProdutoController;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author FGO064
@@ -16,6 +20,37 @@ public class TelaConsultaProdutos extends javax.swing.JFrame {
      */
     public TelaConsultaProdutos() {
         initComponents();
+        LoadTable();
+    }
+    
+    public void LoadTable() {
+        
+        ArrayList<String[]> linhasProdutos = ProdutoController.getProdutos();
+
+        DefaultTableModel tmProdutos = new DefaultTableModel();
+        tmProdutos.addColumn("Código");
+        tmProdutos.addColumn("Nome");
+        tmProdutos.addColumn("Descricao");
+        tmProdutos.addColumn("Preco de Compra");
+        tmProdutos.addColumn("Preco de Venda");
+        tmProdutos.addColumn("Quantidade");
+        tmProdutos.addColumn("Disponivel");
+        tmProdutos.addColumn("Data Cadastro");
+        tblProdutos.setModel(tmProdutos);
+
+        for (String[] c : linhasProdutos) {
+            tmProdutos.addRow(c);
+        }
+
+        tblProdutos.getColumnModel().getColumn(0).setPreferredWidth(50); //Codigo
+        tblProdutos.getColumnModel().getColumn(1).setPreferredWidth(150);//Nome
+        tblProdutos.getColumnModel().getColumn(2).setPreferredWidth(250);//Descricao
+        tblProdutos.getColumnModel().getColumn(3).setPreferredWidth(150);//Preço Compra
+        tblProdutos.getColumnModel().getColumn(4).setPreferredWidth(150);//Preço Venda
+        tblProdutos.getColumnModel().getColumn(5).setPreferredWidth(150);//Quantidade
+        tblProdutos.getColumnModel().getColumn(6).setPreferredWidth(100);//Disponivel
+        tblProdutos.getColumnModel().getColumn(7).setPreferredWidth(150);//Data
+        
     }
 
     /**
@@ -35,7 +70,7 @@ public class TelaConsultaProdutos extends javax.swing.JFrame {
         buttonExcluir = new javax.swing.JButton();
         buttonExcluir1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblProdutos = new javax.swing.JTable();
 
         labelPesquisarQuarto.setText("Pesquisar: ");
 
@@ -75,14 +110,14 @@ public class TelaConsultaProdutos extends javax.swing.JFrame {
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblProdutos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][]
             {
 
             },
             new String []
             {
-                "ID", "Nome", "Descricao", "Preco de Compra", "Preco de Venda", "Quantidade", "Disponivel", "Data Cadastro"
+                "Codigo", "Nome", "Descricao", "Preco de Compra", "Preco de Venda", "Quantidade", "Disponivel", "Data Cadastro"
             }
         )
         {
@@ -105,7 +140,7 @@ public class TelaConsultaProdutos extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tblProdutos);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -130,8 +165,8 @@ public class TelaConsultaProdutos extends javax.swing.JFrame {
                                 .addComponent(buttonAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(20, 20, 20)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 795, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(44, Short.MAX_VALUE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 882, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(48, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -179,7 +214,7 @@ public class TelaConsultaProdutos extends javax.swing.JFrame {
     private javax.swing.JButton buttonExcluir1;
     private javax.swing.JTextField fFieldPesquisa;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel labelPesquisarQuarto;
+    private javax.swing.JTable tblProdutos;
     // End of variables declaration//GEN-END:variables
 }

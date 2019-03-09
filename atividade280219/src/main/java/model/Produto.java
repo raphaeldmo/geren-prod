@@ -82,14 +82,14 @@ public class Produto {
     /**
      * @return the preco_compra
      */
-    public double getPreco_compra() {
+    public double getPrecoCompra() {
         return precoCompra;
     }
 
     /**
      * @param preco_compra the preco_compra to set
      */
-    public void setPreco_compra(double precoCompra) {
+    public void setPrecoCompra(double precoCompra) {
         this.precoCompra = precoCompra;
     }
 
