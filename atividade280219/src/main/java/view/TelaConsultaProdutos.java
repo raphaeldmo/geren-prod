@@ -5,17 +5,21 @@
  */
 package view;
 
+import model.Produto;
+
 /**
  *
  * @author FGO064
  */
 public class TelaConsultaProdutos extends javax.swing.JFrame {
+    Produto _produto = new Produto(); 
 
     /**
      * Creates new form TelaConsultaProdutos
      */
     public TelaConsultaProdutos() {
         initComponents();
+        
     }
 
     /**
@@ -31,8 +35,8 @@ public class TelaConsultaProdutos extends javax.swing.JFrame {
         fFieldPesquisa = new javax.swing.JTextField();
         btnBuscar = new javax.swing.JButton();
         buttonAlterar = new javax.swing.JButton();
+        buttonEditar = new javax.swing.JButton();
         buttonExcluir = new javax.swing.JButton();
-        buttonExcluir1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
 
@@ -52,17 +56,17 @@ public class TelaConsultaProdutos extends javax.swing.JFrame {
             }
         });
 
-        buttonExcluir.setText("Editar");
-        buttonExcluir.addActionListener(new java.awt.event.ActionListener() {
+        buttonEditar.setText("Editar");
+        buttonEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonExcluirActionPerformed(evt);
+                buttonEditarActionPerformed(evt);
             }
         });
 
-        buttonExcluir1.setText("Cadastrar");
-        buttonExcluir1.addActionListener(new java.awt.event.ActionListener() {
+        buttonExcluir.setText("Cadastrar");
+        buttonExcluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonExcluir1ActionPerformed(evt);
+                buttonExcluirActionPerformed(evt);
             }
         });
 
@@ -93,9 +97,9 @@ public class TelaConsultaProdutos extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, 81, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(buttonExcluir1, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(buttonExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(buttonEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(buttonAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -117,8 +121,8 @@ public class TelaConsultaProdutos extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(buttonEditar)
                     .addComponent(buttonExcluir)
-                    .addComponent(buttonExcluir1)
                     .addComponent(buttonAlterar))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -135,20 +139,20 @@ public class TelaConsultaProdutos extends javax.swing.JFrame {
         
     }//GEN-LAST:event_buttonAlterarActionPerformed
 
-    private void buttonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonExcluirActionPerformed
+    private void buttonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEditarActionPerformed
         
-    }//GEN-LAST:event_buttonExcluirActionPerformed
+    }//GEN-LAST:event_buttonEditarActionPerformed
 
-    private void buttonExcluir1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonExcluir1ActionPerformed
+    private void buttonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonExcluirActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_buttonExcluir1ActionPerformed
+    }//GEN-LAST:event_buttonExcluirActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton buttonAlterar;
+    private javax.swing.JButton buttonEditar;
     private javax.swing.JButton buttonExcluir;
-    private javax.swing.JButton buttonExcluir1;
     private javax.swing.JTextField fFieldPesquisa;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
