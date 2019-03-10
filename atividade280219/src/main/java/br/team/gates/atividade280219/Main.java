@@ -6,6 +6,7 @@
 package br.team.gates.atividade280219;
 
 import view.TelaCadastroProdutos;
+import view.TelaConsultaProdutos;
 
 /**
  *
@@ -17,8 +18,8 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        TelaCadastroProdutos cadastro = new TelaCadastroProdutos();
-        cadastro.setVisible(true);
+        TelaConsultaProdutos consulta = new TelaConsultaProdutos();
+        consulta.setVisible(true);
         System.out.println("OI");
     }
     
