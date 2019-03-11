@@ -21,7 +21,37 @@ public class TelaConsultaProdutos extends javax.swing.JFrame {
      */
     public TelaConsultaProdutos() {
         initComponents();
+        LoadTable();
+    }
+    
+    public void LoadTable() {
+        
+        ArrayList<String[]> linhasProdutos = ProdutoController.getProdutos();
 
+        DefaultTableModel tmProdutos = new DefaultTableModel();
+        tmProdutos.addColumn("Código");
+        tmProdutos.addColumn("Nome");
+        tmProdutos.addColumn("Descricao");
+        tmProdutos.addColumn("Preco de Compra");
+        tmProdutos.addColumn("Preco de Venda");
+        tmProdutos.addColumn("Quantidade");
+        tmProdutos.addColumn("Disponivel");
+        tmProdutos.addColumn("Data Cadastro");
+        tblProdutos.setModel(tmProdutos);
+
+        for (String[] c : linhasProdutos) {
+            tmProdutos.addRow(c);
+        }
+
+        tblProdutos.getColumnModel().getColumn(0).setPreferredWidth(50); //Codigo
+        tblProdutos.getColumnModel().getColumn(1).setPreferredWidth(150);//Nome
+        tblProdutos.getColumnModel().getColumn(2).setPreferredWidth(250);//Descricao
+        tblProdutos.getColumnModel().getColumn(3).setPreferredWidth(150);//Preço Compra
+        tblProdutos.getColumnModel().getColumn(4).setPreferredWidth(150);//Preço Venda
+        tblProdutos.getColumnModel().getColumn(5).setPreferredWidth(150);//Quantidade
+        tblProdutos.getColumnModel().getColumn(6).setPreferredWidth(100);//Disponivel
+        tblProdutos.getColumnModel().getColumn(7).setPreferredWidth(150);//Data
+        
     }
 
     /**
@@ -40,7 +70,7 @@ public class TelaConsultaProdutos extends javax.swing.JFrame {
         buttonEditar = new javax.swing.JButton();
         buttonExcluir = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblProdutos = new javax.swing.JTable();
 
         labelPesquisarQuarto.setText("Pesquisar: ");
 
@@ -72,18 +102,37 @@ public class TelaConsultaProdutos extends javax.swing.JFrame {
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+        tblProdutos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][]
+            {
+
             },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+            new String []
+            {
+                "Codigo", "Nome", "Descricao", "Preco de Compra", "Preco de Venda", "Quantidade", "Disponivel", "Data Cadastro"
+            }
+        )
+        {
+            Class[] types = new Class []
+            {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.Double.class, java.lang.Integer.class, java.lang.String.class, java.lang.Object.class
+            };
+            boolean[] canEdit = new boolean []
+            {
+                false, false, false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex)
+            {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex)
+            {
+                return canEdit [columnIndex];
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tblProdutos);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -169,7 +218,7 @@ public class TelaConsultaProdutos extends javax.swing.JFrame {
     private javax.swing.JButton buttonExcluir;
     private javax.swing.JTextField fFieldPesquisa;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tblProdutos;
     private javax.swing.JLabel labelPesquisarQuarto;
     // End of variables declaration//GEN-END:variables
 }
