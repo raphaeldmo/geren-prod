@@ -40,4 +40,10 @@ public class ProdutoController {
 
     }
 
+    public static boolean Alterar(Produto P){
+        if(P.getId()<= 0){
+            return false;
+        }
+        return ProdutoDAO.Atualizar(P);
+    }
 }
