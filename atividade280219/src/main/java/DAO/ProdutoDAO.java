@@ -47,7 +47,7 @@ public class ProdutoDAO
 
                 Update.setString(1, p.getNome());
                 Update.setString(2, p.getDescricao());
-                Update.setDouble(3, p.getPreco_compra());
+                Update.setDouble(3, p.getPrecoCompra());
                 Update.setDouble(4, p.getPrecoVenda());
                 Update.setInt(5, p.getQuantidade());
                 Update.setBoolean(6, p.isDiponivel());
@@ -90,7 +90,28 @@ public class ProdutoDAO
 
     public static boolean Excluir(int id) {
 
-        return true;
+        if (ProdutoExiste(id)) {
+            try {
+                Connection Conexao = obterConexao();
+
+                PreparedStatement Update = Conexao.prepareStatement(
+                        "DELETE FROM produto"
+                        + "WHERE ID = " + id);
+
+               
+                int linhasAfetadas = Update.executeUpdate();
+
+                if (linhasAfetadas > 0) {
+                    return true;
+                }
+
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(ProdutoDAO.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(ProdutoDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return false;
     }
     
     public static ArrayList<Produto> getProdutos()

@@ -5,7 +5,10 @@
  */
 package view;
 
+import controller.ProdutoController;
+import java.util.ArrayList;
 import java.util.Date;
+import javax.swing.table.DefaultTableModel;
 import model.Produto;
 
 /**
@@ -73,6 +76,8 @@ public class TelaConsultaProdutos extends javax.swing.JFrame {
         tblProdutos = new javax.swing.JTable();
 
         labelPesquisarQuarto.setText("Pesquisar: ");
+        getContentPane().add(labelPesquisarQuarto);
+        getContentPane().add(fFieldPesquisa);
 
         btnBuscar.setText("Buscar");
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -80,6 +85,7 @@ public class TelaConsultaProdutos extends javax.swing.JFrame {
                 btnBuscarActionPerformed(evt);
             }
         });
+        getContentPane().add(btnBuscar);
 
         buttonAlterar.setText("Excluir");
         buttonAlterar.addActionListener(new java.awt.event.ActionListener() {
@@ -87,6 +93,7 @@ public class TelaConsultaProdutos extends javax.swing.JFrame {
                 buttonAlterarActionPerformed(evt);
             }
         });
+        getContentPane().add(buttonAlterar);
 
         buttonEditar.setText("Editar");
         buttonEditar.addActionListener(new java.awt.event.ActionListener() {
@@ -94,6 +101,7 @@ public class TelaConsultaProdutos extends javax.swing.JFrame {
                 buttonEditarActionPerformed(evt);
             }
         });
+        getContentPane().add(buttonEditar);
 
         buttonExcluir.setText("Cadastrar");
         buttonExcluir.addActionListener(new java.awt.event.ActionListener() {
@@ -101,82 +109,34 @@ public class TelaConsultaProdutos extends javax.swing.JFrame {
                 buttonExcluirActionPerformed(evt);
             }
         });
+        getContentPane().add(buttonExcluir);
 
         tblProdutos.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][]
-            {
+            new Object [][] {
 
             },
-            new String []
-            {
+            new String [] {
                 "Codigo", "Nome", "Descricao", "Preco de Compra", "Preco de Venda", "Quantidade", "Disponivel", "Data Cadastro"
             }
-        )
-        {
-            Class[] types = new Class []
-            {
+        ) {
+            Class[] types = new Class [] {
                 java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.Double.class, java.lang.Integer.class, java.lang.String.class, java.lang.Object.class
             };
-            boolean[] canEdit = new boolean []
-            {
+            boolean[] canEdit = new boolean [] {
                 false, false, false, false, false, false, false, false
             };
 
-            public Class getColumnClass(int columnIndex)
-            {
+            public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
 
-            public boolean isCellEditable(int rowIndex, int columnIndex)
-            {
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
-        ));
+        });
         jScrollPane1.setViewportView(tblProdutos);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(labelPesquisarQuarto)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(fFieldPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, 81, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(buttonExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(buttonEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(buttonAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labelPesquisarQuarto)
-                    .addComponent(btnBuscar)
-                    .addComponent(fFieldPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(34, 34, 34)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(buttonEditar)
-                    .addComponent(buttonExcluir)
-                    .addComponent(buttonAlterar))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        getContentPane().add(jScrollPane1);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -194,7 +154,7 @@ public class TelaConsultaProdutos extends javax.swing.JFrame {
         Produto p = new Produto();
         p.setId(1);
         p.setNome("Celular");
-        p.setPreco_compra(500.99);
+        p.setPrecoCompra(500.99);
         p.setPrecoVenda(1200.00);
         p.setQuantidade(3);
         p.setDescricao("Celular Xiaomi A2 Lite");
@@ -218,7 +178,7 @@ public class TelaConsultaProdutos extends javax.swing.JFrame {
     private javax.swing.JButton buttonExcluir;
     private javax.swing.JTextField fFieldPesquisa;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tblProdutos;
     private javax.swing.JLabel labelPesquisarQuarto;
+    private javax.swing.JTable tblProdutos;
     // End of variables declaration//GEN-END:variables
 }
