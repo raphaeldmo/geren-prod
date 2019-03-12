@@ -32,12 +32,14 @@ public class ProdutoController {
         System.out.println(produtos);
 
         for (int i = 0; i < produtos.size(); i++) {
-            listaProdutos.add(new String[] { String.valueOf(produtos.get(i).getId()),
+            listaProdutos.add(
+                new String[] { String.valueOf(produtos.get(i).getId()),
                     String.valueOf(produtos.get(i).getNome()), String.valueOf(produtos.get(i).getDescricao()),
                     String.valueOf(produtos.get(i).getPrecoCompra()), String.valueOf(produtos.get(i).getPrecoVenda()),
                     // String.valueOf(produtos.get(i).getCategoria()),
                     String.valueOf(produtos.get(i).getQuantidade()),
-                    String.valueOf(produtos.get(i).getData_cadastro()) });
+                    String.valueOf(produtos.get(i).getData_cadastro())
+                });
 
         }
 
@@ -52,7 +54,7 @@ public class ProdutoController {
         return ProdutoDAO.Atualizar(P);
     }
 
-    public static boolean create
+    public static boolean Criar
     (
         String pNome,
         int pQuantidade,
