@@ -96,7 +96,19 @@ public class ProdutoDAO
     public static ArrayList<Produto> getProdutos()
     {
         ArrayList<Produto> listaProdutos = new ArrayList<Produto>();
-        String query = "SELECT * FROM produto";
+        String query = "SELECT \n" +
+        "produto.id,\n" +
+        "produto.nome, \n" +
+        "produto.descricao,\n" +
+        "categoria.nome AS categoria,\n" +
+        "produto.preco_compra,\n" +
+        "produto.preco_venda,\n" +
+        "produto.quantidade,\n" +
+        "produto.disponivel,\n" +
+        "produto.dt_cadastro\n" +
+        "FROM PRODUTO\n" +
+        "INNER JOIN produto_categoria ON produto.ID = produto_categoria.id_produto\n" +
+        "INNER JOIN categoria ON produto_categoria.ID_CATEGORIA = categoria.id";
         
         try (Connection conn = obterConexao();
                 PreparedStatement stmt = conn.prepareStatement(query);
