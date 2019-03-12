@@ -90,7 +90,28 @@ public class ProdutoDAO
 
     public static boolean Excluir(int id) {
 
-        return true;
+        if (ProdutoExiste(id)) {
+            try {
+                Connection Conexao = obterConexao();
+
+                PreparedStatement Update = Conexao.prepareStatement(
+                        "DELETE FROM produto"
+                        + "WHERE ID = " + id);
+
+               
+                int linhasAfetadas = Update.executeUpdate();
+
+                if (linhasAfetadas > 0) {
+                    return true;
+                }
+
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(ProdutoDAO.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(ProdutoDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return false;
     }
     
     public static ArrayList<Produto> getProdutos()

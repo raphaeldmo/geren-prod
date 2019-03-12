@@ -5,7 +5,10 @@
  */
 package view;
 
+import controller.ProdutoController;
+import java.util.ArrayList;
 import java.util.Date;
+import javax.swing.table.DefaultTableModel;
 import model.Produto;
 import java.util.ArrayList;
 import controller.ProdutoController;
@@ -78,8 +81,8 @@ public class TelaConsultaProdutos extends javax.swing.JFrame {
         tblProdutos = new javax.swing.JTable();
 
         labelPesquisarQuarto.setText("Pesquisar: ");
-        getContentPane().add(labelPesquisarQuarto, java.awt.BorderLayout.CENTER);
-        getContentPane().add(fFieldPesquisa, java.awt.BorderLayout.PAGE_START);
+        getContentPane().add(labelPesquisarQuarto);
+        getContentPane().add(fFieldPesquisa);
 
         btnBuscar.setText("Buscar");
         btnBuscar.addActionListener(new java.awt.event.ActionListener()
@@ -89,7 +92,7 @@ public class TelaConsultaProdutos extends javax.swing.JFrame {
                 btnBuscarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnBuscar, java.awt.BorderLayout.PAGE_END);
+        getContentPane().add(btnBuscar);
 
         buttonAlterar.setText("Excluir");
         buttonAlterar.addActionListener(new java.awt.event.ActionListener()
@@ -99,7 +102,7 @@ public class TelaConsultaProdutos extends javax.swing.JFrame {
                 buttonAlterarActionPerformed(evt);
             }
         });
-        getContentPane().add(buttonAlterar, java.awt.BorderLayout.LINE_END);
+        getContentPane().add(buttonAlterar);
 
         buttonEditar.setText("Editar");
         buttonEditar.addActionListener(new java.awt.event.ActionListener()
@@ -122,38 +125,31 @@ public class TelaConsultaProdutos extends javax.swing.JFrame {
         getContentPane().add(buttonExcluir, java.awt.BorderLayout.CENTER);
 
         tblProdutos.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][]
-            {
+            new Object [][] {
 
             },
-            new String []
-            {
+            new String [] {
                 "Codigo", "Nome", "Descricao", "Preco de Compra", "Preco de Venda", "Quantidade", "Disponivel", "Data Cadastro"
             }
-        )
-        {
-            Class[] types = new Class []
-            {
+        ) {
+            Class[] types = new Class [] {
                 java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.Double.class, java.lang.Integer.class, java.lang.String.class, java.lang.Object.class
             };
-            boolean[] canEdit = new boolean []
-            {
+            boolean[] canEdit = new boolean [] {
                 false, false, false, false, false, false, false, false
             };
 
-            public Class getColumnClass(int columnIndex)
-            {
+            public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
 
-            public boolean isCellEditable(int rowIndex, int columnIndex)
-            {
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
         jScrollPane1.setViewportView(tblProdutos);
 
-        getContentPane().add(jScrollPane1, java.awt.BorderLayout.CENTER);
+        getContentPane().add(jScrollPane1);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
