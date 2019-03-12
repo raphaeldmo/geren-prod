@@ -6,18 +6,21 @@
 package controller;
 
 import DAO.ProdutoDAO;
+
+import java.sql.SQLException;
 import java.util.ArrayList;
 import model.Produto;
 
 public class ProdutoController {
 
-    public static boolean Salvar(String pNome, int pQuantidade, double pPrecoCompra, double pPrecoVenda, int pIdCategoria, String pDescricao) {
+    public static boolean Salvar(String pNome, int pQuantidade, double pPrecoCompra, double pPrecoVenda,
+            int pIdCategoria, String pDescricao) {
         Produto p = new Produto(pNome, pDescricao, pPrecoCompra, pPrecoVenda, pQuantidade);
         return ProdutoDAO.Salvar(p);
     }
 
     public static boolean Excluir(int id) {
-        if(id <= 0){
+        if (id <= 0) {
             return false;
         }
         return ProdutoDAO.Excluir(id);
@@ -29,16 +32,12 @@ public class ProdutoController {
         System.out.println(produtos);
 
         for (int i = 0; i < produtos.size(); i++) {
-            listaProdutos.add(
-                    new String[]{String.valueOf(produtos.get(i).getId()),
-                        String.valueOf(produtos.get(i).getNome()),
-                        String.valueOf(produtos.get(i).getDescricao()),
-                        String.valueOf(produtos.get(i).getPrecoCompra()),
-                        String.valueOf(produtos.get(i).getPrecoVenda()),
-                        //String.valueOf(produtos.get(i).getCategoria()),
-                        String.valueOf(produtos.get(i).getQuantidade()),
-                        String.valueOf(produtos.get(i).getData_cadastro())
-                    });
+            listaProdutos.add(new String[] { String.valueOf(produtos.get(i).getId()),
+                    String.valueOf(produtos.get(i).getNome()), String.valueOf(produtos.get(i).getDescricao()),
+                    String.valueOf(produtos.get(i).getPrecoCompra()), String.valueOf(produtos.get(i).getPrecoVenda()),
+                    // String.valueOf(produtos.get(i).getCategoria()),
+                    String.valueOf(produtos.get(i).getQuantidade()),
+                    String.valueOf(produtos.get(i).getData_cadastro()) });
 
         }
 
@@ -46,15 +45,22 @@ public class ProdutoController {
 
     }
 
-    public static boolean Alterar(Produto P){
-        if(P.getId()<= 0){
+    public static boolean Alterar(Produto P) {
+        if (P.getId() <= 0) {
             return false;
         }
         return ProdutoDAO.Atualizar(P);
     }
 
-    public static boolean create(String pNome, int pQuantidade, double pPrecoCompra, double pPrecoVenda, int pIdCategoria, String pDescricao)
-    {
+    public static boolean create
+    (
+        String pNome,
+        int pQuantidade,
+        double pPrecoCompra,
+        double pPrecoVenda,
+        int pIdCategoria,
+        String pDescricao
+    ) throws ClassNotFoundException, SQLException {
         Produto p = new Produto(pNome, pDescricao, pPrecoCompra, pPrecoVenda, pQuantidade);
 
         return ProdutoDAO.Criar(p);
