@@ -31,7 +31,7 @@ public class TelaCadastroProdutos extends javax.swing.JFrame {
         if (P.getId() > 0) {
             _Acao = "Atualizar";
             fieldNome.setText(P.getNome());
-            fieldPCompra.setText(Double.toString(P.getPreco_compra()));
+            fieldPCompra.setText(Double.toString(P.getPrecoCompra()));
             fieldVenda.setText(Double.toString(P.getPrecoVenda()));
             fieldQtd.setText(Integer.toString(P.getQuantidade()));
             fieldDesc.setText(P.getDescricao());
@@ -179,7 +179,7 @@ public class TelaCadastroProdutos extends javax.swing.JFrame {
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
         if (_Acao == "Atualizar") {
             _Produto.setNome(fieldNome.getText());
-            _Produto.setPreco_compra(Double.parseDouble(fieldPCompra.getText()));
+            _Produto.setPrecoCompra(Double.parseDouble(fieldPCompra.getText()));
             _Produto.setPrecoVenda(Double.parseDouble(fieldVenda.getText()));
             _Produto.setQuantidade(Integer.parseInt(fieldQtd.getText()));
             _Produto.setDescricao(fieldDesc.getText());
