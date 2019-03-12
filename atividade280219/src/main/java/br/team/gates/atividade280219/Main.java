@@ -5,7 +5,6 @@
  */
 package br.team.gates.atividade280219;
 
-import view.TelaCadastroProdutos;
 import view.TelaConsultaProdutos;
 
 /**

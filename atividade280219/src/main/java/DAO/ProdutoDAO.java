@@ -55,7 +55,7 @@ public class ProdutoDAO
                 int linhasAfetadas = Update.executeUpdate();
 
                 if (linhasAfetadas > 0) {
-                    return true;
+                    retorno = true;
                 }
 
             } catch (ClassNotFoundException ex) {
@@ -64,11 +64,13 @@ public class ProdutoDAO
                 Logger.getLogger(ProdutoDAO.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        return false;
+        return retorno;
 
     }
 
     public static boolean ProdutoExiste(int id) {
+        boolean retorno = false;
+
         try {
             Connection Conexao = obterConexao();
 
@@ -77,7 +79,7 @@ public class ProdutoDAO
             int linhasAfetadas = count.executeUpdate();
 
             if (linhasAfetadas > 0) {
-                return true;
+                retorno = true;
             }
 
         } catch (ClassNotFoundException ex) {
@@ -85,10 +87,11 @@ public class ProdutoDAO
         } catch (SQLException ex) {
             Logger.getLogger(ProdutoDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return false;
+        return retorno;
     }
 
     public static boolean Excluir(int id) {
+        boolean retorno = false;
 
         if (ProdutoExiste(id)) {
             try {
@@ -102,7 +105,7 @@ public class ProdutoDAO
                 int linhasAfetadas = Update.executeUpdate();
 
                 if (linhasAfetadas > 0) {
-                    return true;
+                    retorno = true;;
                 }
 
             } catch (ClassNotFoundException ex) {
@@ -111,7 +114,7 @@ public class ProdutoDAO
                 Logger.getLogger(ProdutoDAO.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        return false;
+        return retorno;
     }
     
     public static ArrayList<Produto> getProdutos()
@@ -154,6 +157,44 @@ public class ProdutoDAO
         }
         
         return listaProdutos;
+    }
+
+    public static boolean Criar(Produto p)
+    {
+        boolean retorno = false;
+
+        Connection connection = obterConexao();
+
+        try {
+            PreparedStatement Update = connection.prepareStatement(
+                "UPDATE PRODUTOBD.PRODUTO SET "
+                + "NOME = ?, "
+                + "DESCRICAO = ?, "
+                + "PRECO_COMPRA = ?, "
+                + "PRECO_VENDA = ?,"
+                + "QUANTIDADE = ?,"
+                + "DISPONIVEL = ?,"
+                + "WHERE ID = " + p.getId());
+
+            Update.setString(1, p.getNome());
+            Update.setString(2, p.getDescricao());
+            Update.setDouble(3, p.getPrecoCompra());
+            Update.setDouble(4, p.getPrecoVenda());
+            Update.setInt(5, p.getQuantidade());
+            Update.setBoolean(6, p.isDiponivel());
+
+            int linhasAfetadas = Update.executeUpdate();
+
+            if (linhasAfetadas > 0) {
+                retorno = true;
+            }
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ProdutoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(ProdutoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return retorno;
     }
 
 }

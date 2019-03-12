@@ -17,7 +17,7 @@ public class ProdutoController {
     }
 
     public static boolean Excluir(int id) {
-        if(id<= 0){
+        if(id <= 0){
             return false;
         }
         return ProdutoDAO.Excluir(id);
@@ -51,5 +51,12 @@ public class ProdutoController {
             return false;
         }
         return ProdutoDAO.Atualizar(P);
+    }
+
+    public static boolean create(String pNome, int pQuantidade, double pPrecoCompra, double pPrecoVenda, int pIdCategoria, String pDescricao)
+    {
+        Produto p = new Produto(pNome, pDescricao, pPrecoCompra, pPrecoVenda, pQuantidade);
+
+        return ProdutoDAO.Criar(p);
     }
 }
