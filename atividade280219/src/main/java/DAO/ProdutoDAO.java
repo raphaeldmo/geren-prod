@@ -47,7 +47,7 @@ public class ProdutoDAO
 
                 Update.setString(1, p.getNome());
                 Update.setString(2, p.getDescricao());
-                Update.setDouble(3, p.getPreco_compra());
+                Update.setDouble(3, p.getPrecoCompra());
                 Update.setDouble(4, p.getPrecoVenda());
                 Update.setInt(5, p.getQuantidade());
                 Update.setBoolean(6, p.isDiponivel());
