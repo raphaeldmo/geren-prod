@@ -11,17 +11,19 @@ public class Produto {
     private double precoVenda;
     private int quantidade;
     private boolean diponivel;
+    public String categoria;
     private Date data_cadastro;
 
     //Construtores
     public Produto(int pId, String pNome, String pDescricao, double pPrecoCompra,
-            double pPrecoVenda, int pQuantidade) {
+            double pPrecoVenda, String pCategoria, int pQuantidade) {
         this.id = pId;
         this.nome = pNome;
         this.descricao = pDescricao;
         this.precoCompra = pPrecoCompra;
         this.precoVenda = pPrecoVenda;
         this.quantidade = pQuantidade;
+        this.categoria = pCategoria;
     }
     
     public Produto(String pNome, String pDescricao, double pPrecoCompra,
@@ -55,7 +57,7 @@ public class Produto {
      * @return the nome
      */
     public String getNome() {
-        return nome;
+        return this.nome;
     }
 
     /**
@@ -64,12 +66,16 @@ public class Produto {
     public void setNome(String nome) {
         this.nome = nome;
     }
+    
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
+    }
 
     /**
      * @return the descricao
      */
     public String getDescricao() {
-        return descricao;
+        return this.descricao;
     }
 
     /**
@@ -83,7 +89,7 @@ public class Produto {
      * @return the preco_compra
      */
     public double getPrecoCompra() {
-        return precoCompra;
+        return this.precoCompra;
     }
 
     /**
@@ -97,7 +103,7 @@ public class Produto {
      * @return the preco_venda
      */
     public double getPrecoVenda() {
-        return precoVenda;
+        return this.precoVenda;
     }
 
     /**
@@ -111,7 +117,7 @@ public class Produto {
      * @return the quantidade
      */
     public int getQuantidade() {
-        return quantidade;
+        return this.quantidade;
     }
 
     /**
@@ -125,7 +131,7 @@ public class Produto {
      * @return the diponivel
      */
     public boolean isDiponivel() {
-        return diponivel;
+        return this.diponivel;
     }
 
     /**
@@ -139,7 +145,7 @@ public class Produto {
      * @return the data_cadastro
      */
     public Date getData_cadastro() {
-        return data_cadastro;
+        return this.data_cadastro;
     }
 
     /**
@@ -153,8 +159,8 @@ public class Produto {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public Object getCategoria() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public String getCategoria() {
+        return this.categoria;
     }
     
     
