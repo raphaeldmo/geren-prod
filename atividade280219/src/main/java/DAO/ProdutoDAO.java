@@ -100,12 +100,18 @@ public class ProdutoDAO
         
         try (Connection conn = obterConexao();
                 PreparedStatement stmt = conn.prepareStatement(query);
-                ResultSet resultados = stmt.executeQuery()) {
-            while (resultados.next()) {
-                // TRATAR RESULTADOS
-                int id = resultados.getInt("id");
-                String nome = resultados.getString("nome");
-                System.out.println("id: " + id + ", nome: " + nome);  
+                ResultSet rs = stmt.executeQuery()) {
+            while (rs.next()) {
+                Produto p = new Produto();
+                p.setId(rs.getInt("id"));
+                p.setNome(rs.getString("nome"));
+                p.setDescricao(rs.getString("descricao"));
+                p.setPrecoCompra(rs.getDouble("preco_compra"));
+                p.setPrecoVenda(rs.getDouble("preco_venda"));
+                p.setQuantidade(rs.getInt("quantidade"));
+                p.setData_cadastro(rs.getDate("dt_cadastro"));
+                //System.out.println(p.getData_cadastro());  
+                listaProdutos.add(p);
             }
                 
         }catch(SQLException ex) {
