@@ -78,8 +78,8 @@ public class TelaConsultaProdutos extends javax.swing.JFrame {
         tblProdutos = new javax.swing.JTable();
 
         labelPesquisarQuarto.setText("Pesquisar: ");
-        getContentPane().add(labelPesquisarQuarto);
-        getContentPane().add(fFieldPesquisa);
+        getContentPane().add(labelPesquisarQuarto, java.awt.BorderLayout.CENTER);
+        getContentPane().add(fFieldPesquisa, java.awt.BorderLayout.PAGE_START);
 
         btnBuscar.setText("Buscar");
         btnBuscar.addActionListener(new java.awt.event.ActionListener()
@@ -89,7 +89,7 @@ public class TelaConsultaProdutos extends javax.swing.JFrame {
                 btnBuscarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnBuscar);
+        getContentPane().add(btnBuscar, java.awt.BorderLayout.PAGE_END);
 
         buttonAlterar.setText("Excluir");
         buttonAlterar.addActionListener(new java.awt.event.ActionListener()
@@ -99,7 +99,7 @@ public class TelaConsultaProdutos extends javax.swing.JFrame {
                 buttonAlterarActionPerformed(evt);
             }
         });
-        getContentPane().add(buttonAlterar);
+        getContentPane().add(buttonAlterar, java.awt.BorderLayout.LINE_END);
 
         buttonEditar.setText("Editar");
         buttonEditar.addActionListener(new java.awt.event.ActionListener()
@@ -109,7 +109,7 @@ public class TelaConsultaProdutos extends javax.swing.JFrame {
                 buttonEditarActionPerformed(evt);
             }
         });
-        getContentPane().add(buttonEditar);
+        getContentPane().add(buttonEditar, java.awt.BorderLayout.LINE_START);
 
         buttonExcluir.setText("Cadastrar");
         buttonExcluir.addActionListener(new java.awt.event.ActionListener()
@@ -119,7 +119,7 @@ public class TelaConsultaProdutos extends javax.swing.JFrame {
                 buttonExcluirActionPerformed(evt);
             }
         });
-        getContentPane().add(buttonExcluir);
+        getContentPane().add(buttonExcluir, java.awt.BorderLayout.CENTER);
 
         tblProdutos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][]
@@ -153,7 +153,7 @@ public class TelaConsultaProdutos extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tblProdutos);
 
-        getContentPane().add(jScrollPane1);
+        getContentPane().add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
