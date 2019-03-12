@@ -29,11 +29,11 @@ public class ProdutoController {
             listaProdutos.add(
                     new String[]{String.valueOf(produtos.get(i).getId()),
                         String.valueOf(produtos.get(i).getNome()),
-                        String.valueOf(produtos.get(i).getQuantidade()),
+                        String.valueOf(produtos.get(i).getDescricao()),
                         String.valueOf(produtos.get(i).getPrecoCompra()),
                         String.valueOf(produtos.get(i).getPrecoVenda()),
                         //String.valueOf(produtos.get(i).getCategoria()),
-                        String.valueOf(produtos.get(i).getDescricao()),
+                        String.valueOf(produtos.get(i).getQuantidade()),
                         String.valueOf(produtos.get(i).getData_cadastro())
                     });
 
