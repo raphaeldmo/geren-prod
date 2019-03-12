@@ -10,6 +10,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.table.DefaultTableModel;
 import model.Produto;
+import java.util.ArrayList;
+import controller.ProdutoController;
+import javax.swing.table.DefaultTableModel;
+
 
 /**
  *
@@ -64,7 +68,8 @@ public class TelaConsultaProdutos extends javax.swing.JFrame {
      */
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
 
         labelPesquisarQuarto = new javax.swing.JLabel();
         fFieldPesquisa = new javax.swing.JTextField();
@@ -80,36 +85,44 @@ public class TelaConsultaProdutos extends javax.swing.JFrame {
         getContentPane().add(fFieldPesquisa);
 
         btnBuscar.setText("Buscar");
-        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnBuscar.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnBuscarActionPerformed(evt);
             }
         });
         getContentPane().add(btnBuscar);
 
         buttonAlterar.setText("Excluir");
-        buttonAlterar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        buttonAlterar.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 buttonAlterarActionPerformed(evt);
             }
         });
         getContentPane().add(buttonAlterar);
 
         buttonEditar.setText("Editar");
-        buttonEditar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        buttonEditar.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 buttonEditarActionPerformed(evt);
             }
         });
-        getContentPane().add(buttonEditar);
+        getContentPane().add(buttonEditar, java.awt.BorderLayout.LINE_START);
 
         buttonExcluir.setText("Cadastrar");
-        buttonExcluir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        buttonExcluir.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 buttonExcluirActionPerformed(evt);
             }
         });
-        getContentPane().add(buttonExcluir);
+        getContentPane().add(buttonExcluir, java.awt.BorderLayout.CENTER);
 
         tblProdutos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

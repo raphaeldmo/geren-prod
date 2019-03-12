@@ -20,7 +20,6 @@ public class Main {
     public static void main(String[] args) {
         TelaConsultaProdutos consulta = new TelaConsultaProdutos();
         consulta.setVisible(true);
-        System.out.println("OI");
     }
     
 }

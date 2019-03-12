@@ -26,15 +26,18 @@ public class ProdutoController {
     public static ArrayList<String[]> getProdutos() {
         ArrayList<Produto> produtos = ProdutoDAO.getProdutos();
         ArrayList<String[]> listaProdutos = new ArrayList<>();
+        System.out.println(produtos);
 
         for (int i = 0; i < produtos.size(); i++) {
             listaProdutos.add(
                     new String[]{String.valueOf(produtos.get(i).getId()),
-                        produtos.get(i).getNome(),
+                        String.valueOf(produtos.get(i).getNome()),
+                        String.valueOf(produtos.get(i).getDescricao()),
+                        String.valueOf(produtos.get(i).getPrecoCompra()),
+                        String.valueOf(produtos.get(i).getPrecoVenda()),
+                        //String.valueOf(produtos.get(i).getCategoria()),
                         String.valueOf(produtos.get(i).getQuantidade()),
-                        String.valueOf(produtos.get(i).getPreco()),
-                        String.valueOf(produtos.get(i).getCategoria()),
-                        String.valueOf(produtos.get(i).getDescricao())
+                        String.valueOf(produtos.get(i).getData_cadastro())
                     });
 
         }

@@ -117,16 +117,34 @@ public class ProdutoDAO
     public static ArrayList<Produto> getProdutos()
     {
         ArrayList<Produto> listaProdutos = new ArrayList<Produto>();
-        String query = "SELECT * FROM produto";
+        String query = "SELECT \n" +
+        "produto.id,\n" +
+        "produto.nome, \n" +
+        "produto.descricao,\n" +
+        "categoria.nome AS categoria,\n" +
+        "produto.preco_compra,\n" +
+        "produto.preco_venda,\n" +
+        "produto.quantidade,\n" +
+        "produto.disponivel,\n" +
+        "produto.dt_cadastro\n" +
+        "FROM PRODUTO\n" +
+        "INNER JOIN produto_categoria ON produto.ID = produto_categoria.id_produto\n" +
+        "INNER JOIN categoria ON produto_categoria.ID_CATEGORIA = categoria.id";
         
         try (Connection conn = obterConexao();
                 PreparedStatement stmt = conn.prepareStatement(query);
-                ResultSet resultados = stmt.executeQuery()) {
-            while (resultados.next()) {
-                // TRATAR RESULTADOS
-                int id = resultados.getInt("id");
-                String nome = resultados.getString("nome");
-                System.out.println("id: " + id + ", nome: " + nome);  
+                ResultSet rs = stmt.executeQuery()) {
+            while (rs.next()) {
+                Produto p = new Produto();
+                p.setId(rs.getInt("id"));
+                p.setNome(rs.getString("nome"));
+                p.setDescricao(rs.getString("descricao"));
+                p.setPrecoCompra(rs.getDouble("preco_compra"));
+                p.setPrecoVenda(rs.getDouble("preco_venda"));
+                p.setQuantidade(rs.getInt("quantidade"));
+                p.setData_cadastro(rs.getDate("dt_cadastro"));
+                //System.out.println(p.getData_cadastro());  
+                listaProdutos.add(p);
             }
                 
         }catch(SQLException ex) {
