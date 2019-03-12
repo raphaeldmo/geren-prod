@@ -177,7 +177,7 @@ public class ProdutoDAO
                 + "PRECO_VENDA,"
                 + "QUANTIDADE,"
                 + "DISPONIVEL)"
-                + "VALUES (?, ?, ?, ?, ?, ?, ?)");
+                + "VALUES (?, ?, ?, ?, ?, ?)");
 
             Create.setString(1, p.getNome());
             Create.setString(2, p.getDescricao());
