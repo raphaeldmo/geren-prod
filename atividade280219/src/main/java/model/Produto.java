@@ -10,7 +10,7 @@ public class Produto {
     private double precoCompra;
     private double precoVenda;
     private int quantidade;
-    private boolean diponivel;
+    private int diponivel;
     public String categoria;
     private Date data_cadastro;
 
@@ -130,14 +130,14 @@ public class Produto {
     /**
      * @return the diponivel
      */
-    public boolean isDiponivel() {
+    public int isDiponivel() {
         return this.diponivel;
     }
 
     /**
      * @param diponivel the diponivel to set
      */
-    public void setDiponivel(boolean diponivel) {
+    public void setDiponivel(int diponivel) {
         this.diponivel = diponivel;
     }
 

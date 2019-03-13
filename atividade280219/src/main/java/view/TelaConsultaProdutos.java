@@ -28,17 +28,22 @@ public class TelaConsultaProdutos extends javax.swing.JFrame {
      */
     public TelaConsultaProdutos() {
         initComponents();
-        LoadTable();
+        LoadTable(null);
     }
     
-    public void LoadTable() {
-        
-        ArrayList<String[]> linhasProdutos = ProdutoController.getProdutos();
+    public void LoadTable(String nome) {
+        ArrayList<String[]> linhasProdutos;
+        if(nome == null) {
+            linhasProdutos = ProdutoController.getProdutos(null);
+        } else {
+            linhasProdutos = ProdutoController.getProdutos(nome);
+        }
 
         DefaultTableModel tmProdutos = new DefaultTableModel();
         tmProdutos.addColumn("Código");
         tmProdutos.addColumn("Nome");
         tmProdutos.addColumn("Descricao");
+        tmProdutos.addColumn("Categoria");
         tmProdutos.addColumn("Preco de Compra");
         tmProdutos.addColumn("Preco de Venda");
         tmProdutos.addColumn("Quantidade");
@@ -53,11 +58,12 @@ public class TelaConsultaProdutos extends javax.swing.JFrame {
         tblProdutos.getColumnModel().getColumn(0).setPreferredWidth(50); //Codigo
         tblProdutos.getColumnModel().getColumn(1).setPreferredWidth(150);//Nome
         tblProdutos.getColumnModel().getColumn(2).setPreferredWidth(250);//Descricao
-        tblProdutos.getColumnModel().getColumn(3).setPreferredWidth(150);//Preço Compra
-        tblProdutos.getColumnModel().getColumn(4).setPreferredWidth(150);//Preço Venda
-        tblProdutos.getColumnModel().getColumn(5).setPreferredWidth(150);//Quantidade
-        tblProdutos.getColumnModel().getColumn(6).setPreferredWidth(100);//Disponivel
-        tblProdutos.getColumnModel().getColumn(7).setPreferredWidth(150);//Data
+        tblProdutos.getColumnModel().getColumn(3).setPreferredWidth(150);//Categoria
+        tblProdutos.getColumnModel().getColumn(4).setPreferredWidth(150);//Preço Compra
+        tblProdutos.getColumnModel().getColumn(5).setPreferredWidth(150);//Preço Venda
+        tblProdutos.getColumnModel().getColumn(6).setPreferredWidth(150);//Quantidade
+        tblProdutos.getColumnModel().getColumn(7).setPreferredWidth(100);//Disponivel
+        tblProdutos.getColumnModel().getColumn(8).setPreferredWidth(150);//Data
         
     }
 
@@ -72,7 +78,7 @@ public class TelaConsultaProdutos extends javax.swing.JFrame {
     {
 
         labelPesquisarQuarto = new javax.swing.JLabel();
-        fFieldPesquisa = new javax.swing.JTextField();
+        txtPesquisa = new javax.swing.JTextField();
         btnBuscar = new javax.swing.JButton();
         buttonAlterar = new javax.swing.JButton();
         buttonEditar = new javax.swing.JButton();
@@ -81,8 +87,8 @@ public class TelaConsultaProdutos extends javax.swing.JFrame {
         tblProdutos = new javax.swing.JTable();
 
         labelPesquisarQuarto.setText("Pesquisar: ");
-        getContentPane().add(labelPesquisarQuarto);
-        getContentPane().add(fFieldPesquisa);
+        getContentPane().add(labelPesquisarQuarto, java.awt.BorderLayout.CENTER);
+        getContentPane().add(txtPesquisa, java.awt.BorderLayout.PAGE_START);
 
         btnBuscar.setText("Buscar");
         btnBuscar.addActionListener(new java.awt.event.ActionListener()
@@ -171,7 +177,7 @@ public class TelaConsultaProdutos extends javax.swing.JFrame {
         p.setPrecoVenda(1200.00);
         p.setQuantidade(3);
         p.setDescricao("Celular Xiaomi A2 Lite");
-        p.setDiponivel(true);
+        p.setDiponivel(1);
         Date d = new Date();
         p.setData_cadastro(d);
 
@@ -189,9 +195,9 @@ public class TelaConsultaProdutos extends javax.swing.JFrame {
     private javax.swing.JButton buttonAlterar;
     private javax.swing.JButton buttonEditar;
     private javax.swing.JButton buttonExcluir;
-    private javax.swing.JTextField fFieldPesquisa;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel labelPesquisarQuarto;
     private javax.swing.JTable tblProdutos;
+    private javax.swing.JTextField txtPesquisa;
     // End of variables declaration//GEN-END:variables
 }

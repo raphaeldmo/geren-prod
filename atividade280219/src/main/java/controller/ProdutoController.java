@@ -23,20 +23,26 @@ public class ProdutoController {
         return ProdutoDAO.Excluir(id);
     }
 
-    public static ArrayList<String[]> getProdutos() {
-        ArrayList<Produto> produtos = ProdutoDAO.getProdutos();
+    public static ArrayList<String[]> getProdutos(String nome) {
+        ArrayList<Produto> produtos = ProdutoDAO.getProdutos(nome);
         ArrayList<String[]> listaProdutos = new ArrayList<>();
-        System.out.println(produtos);
 
         for (int i = 0; i < produtos.size(); i++) {
+            String disponivel;
+            if(produtos.get(i).isDiponivel() == 1) {
+                disponivel = "Sim";
+            } else {
+                disponivel = "Não";
+            }
             listaProdutos.add(
                     new String[]{String.valueOf(produtos.get(i).getId()),
                         String.valueOf(produtos.get(i).getNome()),
                         String.valueOf(produtos.get(i).getDescricao()),
+                        String.valueOf(produtos.get(i).getCategoria()),
                         String.valueOf(produtos.get(i).getPrecoCompra()),
                         String.valueOf(produtos.get(i).getPrecoVenda()),
-                        //String.valueOf(produtos.get(i).getCategoria()),
                         String.valueOf(produtos.get(i).getQuantidade()),
+                        String.valueOf(disponivel),
                         String.valueOf(produtos.get(i).getData_cadastro())
                     });
 
