@@ -17,6 +17,9 @@ public class ProdutoController {
     }
 
     public static boolean Excluir(int id) {
+        if(id<= 0){
+            return false;
+        }
         return ProdutoDAO.Excluir(id);
     }
 
