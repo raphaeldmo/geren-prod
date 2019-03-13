@@ -17,7 +17,7 @@ public class ProdutoDAO
 
         // 2) Abrir a conexão
         Connection conn = DriverManager.getConnection(
-                "jdbc:mysql://localhost:3307/produtobd?useTimezone=true&serverTimezone=UTC",
+                "jdbc:mysql://localhost:3306/produtobd?useTimezone=true&serverTimezone=UTC",
                 "root",
                 "");
         return conn;
