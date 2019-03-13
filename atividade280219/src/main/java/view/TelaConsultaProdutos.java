@@ -152,7 +152,8 @@ public class TelaConsultaProdutos extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        System.out.println(txtPesquisa.getText());
+        LoadTable(txtPesquisa.getText());
+        txtPesquisa.setText("");
 
     }//GEN-LAST:event_btnBuscarActionPerformed
 
