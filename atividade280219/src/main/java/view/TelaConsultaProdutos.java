@@ -74,8 +74,7 @@ public class TelaConsultaProdutos extends javax.swing.JFrame {
      */
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents()
-    {
+    private void initComponents() {
 
         labelPesquisarQuarto = new javax.swing.JLabel();
         txtPesquisa = new javax.swing.JTextField();
@@ -91,40 +90,32 @@ public class TelaConsultaProdutos extends javax.swing.JFrame {
         getContentPane().add(txtPesquisa, java.awt.BorderLayout.PAGE_START);
 
         btnBuscar.setText("Buscar");
-        btnBuscar.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBuscarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnBuscar);
+        getContentPane().add(btnBuscar, java.awt.BorderLayout.PAGE_END);
 
         buttonAlterar.setText("Excluir");
-        buttonAlterar.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        buttonAlterar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonAlterarActionPerformed(evt);
             }
         });
-        getContentPane().add(buttonAlterar);
+        getContentPane().add(buttonAlterar, java.awt.BorderLayout.LINE_END);
 
         buttonEditar.setText("Editar");
-        buttonEditar.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        buttonEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonEditarActionPerformed(evt);
             }
         });
         getContentPane().add(buttonEditar, java.awt.BorderLayout.LINE_START);
 
         buttonExcluir.setText("Cadastrar");
-        buttonExcluir.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        buttonExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonExcluirActionPerformed(evt);
             }
         });
@@ -155,13 +146,13 @@ public class TelaConsultaProdutos extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tblProdutos);
 
-        getContentPane().add(jScrollPane1);
+        getContentPane().add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-
+        System.out.println(txtPesquisa.getText());
 
     }//GEN-LAST:event_btnBuscarActionPerformed
 

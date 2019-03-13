@@ -154,7 +154,7 @@ public class ProdutoDAO
             }
                 
         }catch(SQLException ex) {
-            ex.printStackTrace();
+            System.out.println(ex);
         } catch(ClassNotFoundException ex) {
             ex.printStackTrace();
         }
