@@ -169,7 +169,7 @@ public class TelaConsultaProdutos extends javax.swing.JFrame {
         p.setPrecoVenda(1200.00);
         p.setQuantidade(3);
         p.setDescricao("Celular Xiaomi A2 Lite");
-        p.setDiponivel(1);
+        p.setDisponivel(1);
         Date d = new Date();
         p.setData_cadastro(d);
 

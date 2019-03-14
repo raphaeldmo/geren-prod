@@ -19,7 +19,7 @@ public class ProdutoDAO
         Connection conn = DriverManager.getConnection(
                 "jdbc:mysql://localhost:3306/produtobd?useTimezone=true&serverTimezone=UTC",
                 "root",
-                "");
+                "valletech");
         return conn;
     }
 
@@ -50,7 +50,7 @@ public class ProdutoDAO
                 Update.setDouble(3, p.getPrecoCompra());
                 Update.setDouble(4, p.getPrecoVenda());
                 Update.setInt(5, p.getQuantidade());
-                Update.setInt(6, p.isDiponivel());
+                Update.setInt(6, p.isDisponivel());
 
                 int linhasAfetadas = Update.executeUpdate();
 
@@ -89,14 +89,12 @@ public class ProdutoDAO
     }
 
     public static boolean Excluir(int id) {
-
-        if (ProdutoExiste(id)) {
             try {
+                System.out.println(id);
                 Connection Conexao = obterConexao();
 
                 PreparedStatement Update = Conexao.prepareStatement(
-                        "DELETE FROM produto"
-                        + "WHERE ID = " + id);
+                        "DELETE FROM produto WHERE ID = " + id);
 
                
                 int linhasAfetadas = Update.executeUpdate();
@@ -110,7 +108,6 @@ public class ProdutoDAO
             } catch (SQLException ex) {
                 Logger.getLogger(ProdutoDAO.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }
         return false;
     }
     
@@ -146,7 +143,7 @@ public class ProdutoDAO
                 p.setPrecoCompra(rs.getDouble("preco_compra"));
                 p.setCategoria(rs.getString("categoria"));
                 p.setPrecoVenda(rs.getDouble("preco_venda"));
-                p.setDiponivel(rs.getInt("disponivel"));
+                p.setDisponivel(rs.getInt("disponivel"));
                 p.setQuantidade(rs.getInt("quantidade"));
                 p.setData_cadastro(rs.getDate("dt_cadastro"));
                 //System.out.println(p.getData_cadastro());  

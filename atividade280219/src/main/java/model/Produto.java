@@ -10,7 +10,7 @@ public class Produto {
     private double precoCompra;
     private double precoVenda;
     private int quantidade;
-    private int diponivel;
+    private int disponivel;
     public String categoria;
     private Date data_cadastro;
 
@@ -128,17 +128,17 @@ public class Produto {
     }
 
     /**
-     * @return the diponivel
+     * @return the disponivel
      */
-    public int isDiponivel() {
-        return this.diponivel;
+    public int isDisponivel() {
+        return this.disponivel;
     }
 
     /**
-     * @param diponivel the diponivel to set
+     * @param disponivel the disponivel to set
      */
-    public void setDiponivel(int diponivel) {
-        this.diponivel = diponivel;
+    public void setDisponivel(int disponivel) {
+        this.disponivel = disponivel;
     }
 
     /**
