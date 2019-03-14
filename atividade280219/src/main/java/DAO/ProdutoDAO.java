@@ -28,7 +28,8 @@ public class ProdutoDAO
         return true;
     }
 
-    public static boolean Atualizar(Produto p) {
+    public static boolean Atualizar(Produto p)
+    {
 
         //boolean retorno = false;
         if (ProdutoExiste(p.getId())) {
@@ -55,7 +56,7 @@ public class ProdutoDAO
                 int linhasAfetadas = Update.executeUpdate();
 
                 if (linhasAfetadas > 0) {
-                    return true;
+                    retorno = true;
                 }
 
             } catch (ClassNotFoundException ex) {
@@ -64,20 +65,23 @@ public class ProdutoDAO
                 Logger.getLogger(ProdutoDAO.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        return false;
+        return retorno;
 
     }
 
-    public static boolean ProdutoExiste(int id) {
+    public static boolean ProdutoExiste(int id)
+    {
+        boolean retorno = false;
+
         try {
             Connection Conexao = obterConexao();
 
-            PreparedStatement count = Conexao.prepareStatement("Select count(id)from PRODUTODB.PRODUTO where id = " + id);
+            PreparedStatement count = Conexao.prepareStatement("Select count(id) from PRODUTODB.PRODUTO where id = " + id);
 
             int linhasAfetadas = count.executeUpdate();
 
             if (linhasAfetadas > 0) {
-                return true;
+                retorno = true;
             }
 
         } catch (ClassNotFoundException ex) {
@@ -85,10 +89,14 @@ public class ProdutoDAO
         } catch (SQLException ex) {
             Logger.getLogger(ProdutoDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return false;
+        return retorno;
     }
 
-    public static boolean Excluir(int id) {
+    public static boolean Excluir(int id)
+    {
+        boolean retorno = false;
+
+        if (ProdutoExiste(id)) {
             try {
                 System.out.println(id);
                 Connection Conexao = obterConexao();
@@ -100,7 +108,7 @@ public class ProdutoDAO
                 int linhasAfetadas = Update.executeUpdate();
 
                 if (linhasAfetadas > 0) {
-                    return true;
+                    retorno = true;
                 }
 
             } catch (ClassNotFoundException ex) {
@@ -108,7 +116,8 @@ public class ProdutoDAO
             } catch (SQLException ex) {
                 Logger.getLogger(ProdutoDAO.class.getName()).log(Level.SEVERE, null, ex);
             }
-        return false;
+        }
+        return retorno;
     }
     
     public static ArrayList<Produto> getProdutos(String nome)
@@ -159,4 +168,40 @@ public class ProdutoDAO
         return listaProdutos;
     }
 
+    public static boolean Criar(Produto p) throws ClassNotFoundException, SQLException
+    {
+        boolean retorno = false;
+
+        Connection connection = obterConexao();
+
+        try {
+            PreparedStatement Create = connection.prepareStatement(
+                "INSERT INTO PRODUTOBD.PRODUTO ("
+                + "NOME,"
+                + "DESCRICAO,"
+                + "PRECO_COMPRA,"
+                + "PRECO_VENDA,"
+                + "QUANTIDADE,"
+                + "DISPONIVEL)"
+                + "VALUES (?, ?, ?, ?, ?, ?)");
+
+            Create.setString(1, p.getNome());
+            Create.setString(2, p.getDescricao());
+            Create.setDouble(3, p.getPrecoCompra());
+            Create.setDouble(4, p.getPrecoVenda());
+            Create.setInt(5, p.getQuantidade());
+            Create.setBoolean(6, p.isDiponivel());
+
+            int linhasAfetadas = Create.executeUpdate();
+
+            if (linhasAfetadas > 0) {
+                retorno = true;
+            }
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(ProdutoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return retorno;
+    }
 }

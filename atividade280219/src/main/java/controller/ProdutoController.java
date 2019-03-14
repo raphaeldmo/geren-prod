@@ -6,12 +6,15 @@
 package controller;
 
 import DAO.ProdutoDAO;
+
+import java.sql.SQLException;
 import java.util.ArrayList;
 import model.Produto;
 
 public class ProdutoController {
 
-    public static boolean Salvar(String pNome, int pQuantidade, double pPrecoCompra, double pPrecoVenda, int pIdCategoria, String pDescricao) {
+    public static boolean Salvar(String pNome, int pQuantidade, double pPrecoCompra, double pPrecoVenda,
+            int pIdCategoria, String pDescricao) {
         Produto p = new Produto(pNome, pDescricao, pPrecoCompra, pPrecoVenda, pQuantidade);
         return ProdutoDAO.Salvar(p);
     }
@@ -35,16 +38,18 @@ public class ProdutoController {
                 disponivel = "Não";
             }
             listaProdutos.add(
-                    new String[]{String.valueOf(produtos.get(i).getId()),
-                        String.valueOf(produtos.get(i).getNome()),
-                        String.valueOf(produtos.get(i).getDescricao()),
-                        String.valueOf(produtos.get(i).getCategoria()),
-                        String.valueOf(produtos.get(i).getPrecoCompra()),
-                        String.valueOf(produtos.get(i).getPrecoVenda()),
-                        String.valueOf(produtos.get(i).getQuantidade()),
-                        String.valueOf(disponivel),
-                        String.valueOf(produtos.get(i).getData_cadastro())
-                    });
+                new String[]{
+                    String.valueOf(produtos.get(i).getId()),
+                    String.valueOf(produtos.get(i).getNome()),
+                    String.valueOf(produtos.get(i).getDescricao()),
+                    String.valueOf(produtos.get(i).getCategoria()),
+                    String.valueOf(produtos.get(i).getPrecoCompra()),
+                    String.valueOf(produtos.get(i).getPrecoVenda()),
+                    String.valueOf(produtos.get(i).getQuantidade()),
+                    String.valueOf(disponivel),
+                    String.valueOf(produtos.get(i).getData_cadastro())
+                }
+          );
 
         }
 
@@ -52,10 +57,24 @@ public class ProdutoController {
 
     }
 
-    public static boolean Alterar(Produto P){
-        if(P.getId()<= 0){
+    public static boolean Alterar(Produto P) {
+        if (P.getId() <= 0) {
             return false;
         }
         return ProdutoDAO.Atualizar(P);
+    }
+
+    public static boolean Criar
+    (
+        String pNome,
+        int pQuantidade,
+        double pPrecoCompra,
+        double pPrecoVenda,
+        int pIdCategoria,
+        String pDescricao
+    ) throws ClassNotFoundException, SQLException {
+        Produto p = new Produto(pNome, pDescricao, pPrecoCompra, pPrecoVenda, pQuantidade);
+
+        return ProdutoDAO.Criar(p);
     }
 }
