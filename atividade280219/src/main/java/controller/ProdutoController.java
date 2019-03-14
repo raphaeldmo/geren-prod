@@ -17,9 +17,9 @@ public class ProdutoController {
     }
 
     public static boolean Excluir(int id) {
-        if(id<= 0){
+        /*if(id<= 0){
             return false;
-        }
+        }*/
         return ProdutoDAO.Excluir(id);
     }
 
@@ -29,7 +29,7 @@ public class ProdutoController {
 
         for (int i = 0; i < produtos.size(); i++) {
             String disponivel;
-            if(produtos.get(i).isDiponivel() == 1) {
+            if(produtos.get(i).isDisponivel() == 1) {
                 disponivel = "Sim";
             } else {
                 disponivel = "Não";

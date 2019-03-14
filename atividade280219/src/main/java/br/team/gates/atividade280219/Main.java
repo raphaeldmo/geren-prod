@@ -5,8 +5,7 @@
  */
 package br.team.gates.atividade280219;
 
-import view.TelaCadastroProdutos;
-import view.TelaConsultaProdutos;
+import view.TelaProdutos;
 
 /**
  *
@@ -18,8 +17,8 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        TelaConsultaProdutos consulta = new TelaConsultaProdutos();
-        consulta.setVisible(true);
+        TelaProdutos produtos = new TelaProdutos();
+        produtos.setVisible(true);
     }
     
 }

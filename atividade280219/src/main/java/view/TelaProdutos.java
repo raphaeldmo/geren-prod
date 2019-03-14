@@ -7,16 +7,35 @@ package view;
 
 import controller.ProdutoController;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import model.Produto;
 
 /**
  *
  * @author victor.snsilva
  */
 public class TelaProdutos extends javax.swing.JFrame {
+    
+    String _Acao = "";
+    Produto _Produto = new Produto();
 
     public TelaProdutos() {
         initComponents();
+        txtId.setVisible(false);
+        LoadTable(null);
+        this.habilitaDesabilitaFormulario(false);
+    }
+    
+    public void habilitaDesabilitaFormulario(boolean habilita) {
+        txtNome.setEditable(habilita);
+        txtPrecoCompra.setEditable(habilita);
+        txtPrecoVenda.setEditable(habilita);
+        txtQuantidade.setEditable(habilita);
+        comboCategoria.setEditable(habilita);
+        txtDescricao.setEditable(habilita);
+        btnSalvar.setEnabled(habilita);
+        btnCancelar.setEnabled(habilita);
     }
     
     public void LoadTable(String nome) {
@@ -76,7 +95,7 @@ public class TelaProdutos extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblProdutos = new javax.swing.JTable();
-        jTextField4 = new javax.swing.JTextField();
+        txtPesquisa = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         btnBuscar = new javax.swing.JButton();
         btnSalvar = new javax.swing.JButton();
@@ -87,7 +106,8 @@ public class TelaProdutos extends javax.swing.JFrame {
         txtQuantidade = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        comboCategoria = new javax.swing.JComboBox<>();
+        comboCategoria = new javax.swing.JComboBox<String>();
+        txtId = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -135,14 +155,29 @@ public class TelaProdutos extends javax.swing.JFrame {
         jLabel5.setText("Buscar:");
 
         btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
 
         btnSalvar.setText("Salvar");
+        btnSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalvarActionPerformed(evt);
+            }
+        });
 
         btnCancelar.setText("Cancelar");
 
         btnCadastrar.setText("Cadastrar");
+        btnCadastrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCadastrarActionPerformed(evt);
+            }
+        });
 
-        btnAlterar.setText("Alterar");
+        btnAlterar.setText("Editar");
         btnAlterar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAlterarActionPerformed(evt);
@@ -150,12 +185,17 @@ public class TelaProdutos extends javax.swing.JFrame {
         });
 
         btnExcluir.setText("Excluir");
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirActionPerformed(evt);
+            }
+        });
 
         jLabel6.setText("Quantidade:");
 
         jLabel7.setText("Categoria:");
 
-        comboCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboCategoria.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -173,17 +213,20 @@ public class TelaProdutos extends javax.swing.JFrame {
                             .addComponent(btnExcluir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addGap(18, 18, 18)
-                                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnBuscar))
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jLabel1)
                                 .addComponent(jLabel2)
                                 .addComponent(jLabel3)
-                                .addComponent(jLabel6)))
+                                .addComponent(jLabel6))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(txtPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(btnBuscar))
+                                    .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(52, 52, 52)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtQuantidade, javax.swing.GroupLayout.DEFAULT_SIZE, 254, Short.MAX_VALUE)
@@ -214,10 +257,12 @@ public class TelaProdutos extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(26, 26, 26)
+                .addContainerGap()
+                .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel1)
-                    .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtPrecoCompra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -240,12 +285,12 @@ public class TelaProdutos extends javax.swing.JFrame {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnSalvar)
                     .addComponent(btnCancelar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5)
                     .addComponent(btnBuscar))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -274,6 +319,139 @@ public class TelaProdutos extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnAlterarActionPerformed
 
+    private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        if (_Acao == "Atualizar") {
+            _Produto.setNome(txtNome.getText());
+            _Produto.setPrecoCompra(Double.parseDouble(txtPrecoCompra.getText()));
+            _Produto.setPrecoVenda(Double.parseDouble(txtPrecoVenda.getText()));
+            _Produto.setQuantidade(Integer.parseInt(txtQuantidade.getText()));
+            _Produto.setDescricao(txtDescricao.getText());
+            if(checkHabilitado.isSelected()) {
+                _Produto.setDisponivel(1);
+            } else {
+                _Produto.setDisponivel(0);
+            }
+            if (ProdutoController.Alterar(_Produto)) {
+                JOptionPane.showMessageDialog(null, "Produto atualizado com sucesso!");
+                new TelaConsultaProdutos().setVisible(true);//que quer abrir
+                dispose();
+            } else {
+                JOptionPane.showMessageDialog(null, "Falha ao atualizar o produto!");
+
+            }
+        }
+    }//GEN-LAST:event_btnSalvarActionPerformed
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        
+        if(txtPesquisa.getText().equals("")) {
+            LoadTable(null);
+        } else {
+            LoadTable(txtPesquisa.getText());
+        }
+        txtPesquisa.setText("");
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+        if (tblProdutos.getRowCount() > 0) {
+            if (ProdutoController.Excluir(Integer.parseInt(tblProdutos.getModel().getValueAt(tblProdutos.getSelectedRow(), 0).toString()))) {
+                this.LoadTable(null);
+                JOptionPane.showMessageDialog(this, "Produto excluído da base de dados");
+            } else {
+                JOptionPane.showMessageDialog(this, "Falha ao excluir o Produto!");
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Não há Produtos para excluir!");
+        }
+        
+    }//GEN-LAST:event_btnExcluirActionPerformed
+
+    private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
+        habilitaDesabilitaFormulario(true);
+    }//GEN-LAST:event_btnCadastrarActionPerformed
+
+    private boolean ValidarFormulario() {
+
+        if (this.txtNome.getText().equalsIgnoreCase("")) {
+            JOptionPane.showMessageDialog(this, "Defina um nome para o produto!");
+            return false;
+        }
+
+        try {
+            if (this.txtQuantidade.getText().equalsIgnoreCase("")) {
+                JOptionPane.showMessageDialog(null, "Defina a quantidade em estoque do produto!");
+                return false;
+            }
+            Integer.parseInt(txtQuantidade.getText());
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Digite apenas números inteiros para a quantidade em estoque");
+            return false;
+        } finally {
+
+        }
+
+        try {
+            if (txtPrecoCompra.getText().equals("")) {
+                JOptionPane.showMessageDialog(null, "Coloque o preço do produto!");
+                return false;
+            }
+            Double.parseDouble(txtPrecoCompra.getText());
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Digite apenas valores decimais para o preço do produto. Ex:500.50");
+            return false;
+        } finally {
+
+        }
+        try {
+            if (txtPrecoVenda.getText().equals("")) {
+                JOptionPane.showMessageDialog(null, "Defina um preço para produto!");
+                return false;
+            }
+            Double.parseDouble(txtPrecoVenda.getText());
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Digite apenas valores decimais para o preço do produto. Ex:500.50");
+            return false;
+        } finally {
+
+        }
+        if (this.txtDescricao.getText().equalsIgnoreCase("")) {
+            JOptionPane.showMessageDialog(this, "Defina uma descrição para produto!");
+            return false;
+        }
+
+        return true;
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -327,10 +505,11 @@ public class TelaProdutos extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField jTextField4;
     private javax.swing.JTable tblProdutos;
     private javax.swing.JTextArea txtDescricao;
+    private javax.swing.JTextField txtId;
     private javax.swing.JTextField txtNome;
+    private javax.swing.JTextField txtPesquisa;
     private javax.swing.JTextField txtPrecoCompra;
     private javax.swing.JTextField txtPrecoVenda;
     private javax.swing.JTextField txtQuantidade;
