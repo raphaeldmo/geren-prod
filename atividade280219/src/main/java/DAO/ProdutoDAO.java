@@ -30,7 +30,7 @@ public class ProdutoDAO
 
     public static boolean Atualizar(Produto p) {
 
-        boolean retorno = false;
+        //boolean retorno = false;
         if (ProdutoExiste(p.getId())) {
             try {
                 Connection Conexao = obterConexao();
