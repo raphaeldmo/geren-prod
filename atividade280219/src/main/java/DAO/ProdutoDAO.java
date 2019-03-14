@@ -30,8 +30,8 @@ public class ProdutoDAO
 
     public static boolean Atualizar(Produto p)
     {
-
-        //boolean retorno = false;
+        boolean retorno = false;
+        
         if (ProdutoExiste(p.getId())) {
             try {
                 Connection Conexao = obterConexao();
@@ -173,6 +173,26 @@ public class ProdutoDAO
         boolean retorno = false;
 
         Connection connection = obterConexao();
+        
+        String query = "select max(id) from produto";
+        
+        PreparedStatement stmt = connection.prepareStatement(query);
+        
+        ResultSet rs = stmt.executeQuery();
+        
+        rs.next();
+        
+        int maxId = rs.getInt(1);
+        
+        String categoriaId = "SELECT id FROM categoria WHERE categoria.nome = " + p.getCategoria();
+        
+        PreparedStatement prepare = connection.prepareStatement(categoriaId);
+        
+        ResultSet result = prepare.executeQuery();
+        
+        result.next();
+        
+        int idCategoria = result.getInt(1);
 
         try {
             PreparedStatement Create = connection.prepareStatement(
@@ -190,7 +210,16 @@ public class ProdutoDAO
             Create.setDouble(3, p.getPrecoCompra());
             Create.setDouble(4, p.getPrecoVenda());
             Create.setInt(5, p.getQuantidade());
-            Create.setBoolean(6, p.isDiponivel());
+            Create.setInt(6, p.isDisponivel());
+            
+            PreparedStatement CreateCategoriaProduto = connection.prepareStatement(
+                "INSERT INTO PRODUTOBD.CATEGORIA_PRODUTO ("
+                + "ID_PRODUTO,"
+                + "ID_CATEGORIA)"
+                + "VALUES (?, ?)");
+
+            CreateCategoriaProduto.setInt(1, maxId);
+            CreateCategoriaProduto.setInt(2, idCategoria);         
 
             int linhasAfetadas = Create.executeUpdate();
 

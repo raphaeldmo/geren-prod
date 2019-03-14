@@ -64,17 +64,11 @@ public class ProdutoController {
         return ProdutoDAO.Atualizar(P);
     }
 
-    public static boolean Criar
-    (
-        String pNome,
-        int pQuantidade,
-        double pPrecoCompra,
-        double pPrecoVenda,
-        int pIdCategoria,
-        String pDescricao
-    ) throws ClassNotFoundException, SQLException {
-        Produto p = new Produto(pNome, pDescricao, pPrecoCompra, pPrecoVenda, pQuantidade);
+    public static boolean Criar(Produto P) throws ClassNotFoundException, SQLException {
+        if (P.getId() <= 0) {
+            return false;
+        }
 
-        return ProdutoDAO.Criar(p);
+        return ProdutoDAO.Criar(P);
     }
 }

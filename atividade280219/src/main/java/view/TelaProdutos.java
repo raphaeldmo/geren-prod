@@ -6,7 +6,10 @@
 package view;
 
 import controller.ProdutoController;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.Produto;
@@ -106,7 +109,7 @@ public class TelaProdutos extends javax.swing.JFrame {
         txtQuantidade = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        comboCategoria = new javax.swing.JComboBox<String>();
+        comboCategoria = new javax.swing.JComboBox<>();
         txtId = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -195,7 +198,12 @@ public class TelaProdutos extends javax.swing.JFrame {
 
         jLabel7.setText("Categoria:");
 
-        comboCategoria.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboCategoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboCategoriaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -288,7 +296,7 @@ public class TelaProdutos extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnSalvar)
                     .addComponent(btnCancelar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5)
@@ -320,38 +328,39 @@ public class TelaProdutos extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAlterarActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+
+        if (_Acao == "Salvar") {
+            _Produto.setNome(txtNome.getText());
+            _Produto.setPrecoCompra(Double.parseDouble(txtPrecoCompra.getText()));
+            _Produto.setPrecoVenda(Double.parseDouble(txtPrecoVenda.getText()));
+            _Produto.setQuantidade(Integer.parseInt(txtQuantidade.getText()));
+            _Produto.setCategoria((String) comboCategoria.getSelectedItem());
+            _Produto.setDescricao(txtDescricao.getText());
+            if(checkHabilitado.isSelected()) {
+                _Produto.setDisponivel(1);
+            } else {
+                _Produto.setDisponivel(0);
+            }
+            try {
+                if (ProdutoController.Criar(_Produto)) {
+                    JOptionPane.showMessageDialog(null, "Produto criado com sucesso!");
+                    new TelaConsultaProdutos().setVisible(true);//que quer abrir
+                    dispose();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Falha ao criar o produto!");
+                    
+                }
+            } catch (ClassNotFoundException | SQLException ex) {
+                Logger.getLogger(TelaProdutos.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
         if (_Acao == "Atualizar") {
             _Produto.setNome(txtNome.getText());
             _Produto.setPrecoCompra(Double.parseDouble(txtPrecoCompra.getText()));
             _Produto.setPrecoVenda(Double.parseDouble(txtPrecoVenda.getText()));
             _Produto.setQuantidade(Integer.parseInt(txtQuantidade.getText()));
+            _Produto.setCategoria((String) comboCategoria.getSelectedItem());
             _Produto.setDescricao(txtDescricao.getText());
             if(checkHabilitado.isSelected()) {
                 _Produto.setDisponivel(1);
@@ -396,6 +405,10 @@ public class TelaProdutos extends javax.swing.JFrame {
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
         habilitaDesabilitaFormulario(true);
     }//GEN-LAST:event_btnCadastrarActionPerformed
+
+    private void comboCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboCategoriaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboCategoriaActionPerformed
 
     private boolean ValidarFormulario() {
 
