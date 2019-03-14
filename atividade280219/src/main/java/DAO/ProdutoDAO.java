@@ -19,7 +19,7 @@ public class ProdutoDAO
         Connection conn = DriverManager.getConnection(
                 "jdbc:mysql://localhost:3306/produtobd?useTimezone=true&serverTimezone=UTC",
                 "root",
-                "valletech");
+                "");
         return conn;
     }
 
