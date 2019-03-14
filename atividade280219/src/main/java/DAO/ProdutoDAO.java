@@ -31,7 +31,7 @@ public class ProdutoDAO
     public static boolean Atualizar(Produto p)
     {
 
-        boolean retorno = false;
+        //boolean retorno = false;
         if (ProdutoExiste(p.getId())) {
             try {
                 Connection Conexao = obterConexao();
@@ -51,7 +51,7 @@ public class ProdutoDAO
                 Update.setDouble(3, p.getPrecoCompra());
                 Update.setDouble(4, p.getPrecoVenda());
                 Update.setInt(5, p.getQuantidade());
-                Update.setBoolean(6, p.isDiponivel());
+                Update.setInt(6, p.isDisponivel());
 
                 int linhasAfetadas = Update.executeUpdate();
 
@@ -98,11 +98,11 @@ public class ProdutoDAO
 
         if (ProdutoExiste(id)) {
             try {
+                System.out.println(id);
                 Connection Conexao = obterConexao();
 
                 PreparedStatement Update = Conexao.prepareStatement(
-                        "DELETE FROM produto"
-                        + "WHERE ID = " + id);
+                        "DELETE FROM produto WHERE ID = " + id);
 
                
                 int linhasAfetadas = Update.executeUpdate();
@@ -120,9 +120,10 @@ public class ProdutoDAO
         return retorno;
     }
     
-    public static ArrayList<Produto> getProdutos()
+    public static ArrayList<Produto> getProdutos(String nome)
     {
         ArrayList<Produto> listaProdutos = new ArrayList<Produto>();
+        
         String query = "SELECT \n" +
         "produto.id,\n" +
         "produto.nome, \n" +
@@ -135,7 +136,10 @@ public class ProdutoDAO
         "produto.dt_cadastro\n" +
         "FROM PRODUTO\n" +
         "INNER JOIN produto_categoria ON produto.ID = produto_categoria.id_produto\n" +
-        "INNER JOIN categoria ON produto_categoria.ID_CATEGORIA = categoria.id";
+        "INNER JOIN categoria ON produto_categoria.ID_CATEGORIA = categoria.id ";
+        if(nome != null) {
+            query += "WHERE produto.nome like '%" + nome + "%'";
+        }
         
         try (Connection conn = obterConexao();
                 PreparedStatement stmt = conn.prepareStatement(query);
@@ -146,7 +150,9 @@ public class ProdutoDAO
                 p.setNome(rs.getString("nome"));
                 p.setDescricao(rs.getString("descricao"));
                 p.setPrecoCompra(rs.getDouble("preco_compra"));
+                p.setCategoria(rs.getString("categoria"));
                 p.setPrecoVenda(rs.getDouble("preco_venda"));
+                p.setDisponivel(rs.getInt("disponivel"));
                 p.setQuantidade(rs.getInt("quantidade"));
                 p.setData_cadastro(rs.getDate("dt_cadastro"));
                 //System.out.println(p.getData_cadastro());  
@@ -154,7 +160,7 @@ public class ProdutoDAO
             }
                 
         }catch(SQLException ex) {
-            ex.printStackTrace();
+            System.out.println(ex);
         } catch(ClassNotFoundException ex) {
             ex.printStackTrace();
         }
