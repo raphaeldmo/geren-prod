@@ -11,12 +11,12 @@ public class Produto {
     private double precoVenda;
     private int quantidade;
     private int disponivel;
-    public String categoria;
+    public int categoria;
     private Date data_cadastro;
 
     //Construtores
     public Produto(int pId, String pNome, String pDescricao, double pPrecoCompra,
-            double pPrecoVenda, String pCategoria, int pQuantidade) {
+            double pPrecoVenda, int pCategoria, int pQuantidade, int pDisponivel) {
         this.id = pId;
         this.nome = pNome;
         this.descricao = pDescricao;
@@ -24,15 +24,18 @@ public class Produto {
         this.precoVenda = pPrecoVenda;
         this.quantidade = pQuantidade;
         this.categoria = pCategoria;
+        this.disponivel = pDisponivel;
     }
     
     public Produto(String pNome, String pDescricao, double pPrecoCompra,
-        double pPrecoVenda, int pQuantidade) {
+        double pPrecoVenda, int pQuantidade, int pIdCategoria, int pDisponivel) {
         this.nome = pNome;
         this.descricao = pDescricao;
         this.precoCompra = pPrecoCompra;
         this.precoVenda = pPrecoVenda;
         this.quantidade = pQuantidade;
+        this.categoria = pIdCategoria;
+        this.disponivel = pDisponivel;
     }
 
     public Produto() {
@@ -67,7 +70,7 @@ public class Produto {
         this.nome = nome;
     }
     
-    public void setCategoria(String categoria) {
+    public void setCategoria(int categoria) {
         this.categoria = categoria;
     }
 
@@ -159,7 +162,7 @@ public class Produto {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public String getCategoria() {
+    public int getCategoria() {
         return this.categoria;
     }
     

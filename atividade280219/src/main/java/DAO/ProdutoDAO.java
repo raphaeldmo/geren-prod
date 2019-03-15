@@ -17,7 +17,7 @@ public class ProdutoDAO
 
         // 2) Abrir a conexão
         Connection conn = DriverManager.getConnection(
-                "jdbc:mysql://localhost:3306/produtobd?useTimezone=true&serverTimezone=UTC",
+                "jdbc:mysql://localhost:3310/produtobd?useTimezone=true&serverTimezone=UTC",
                 "root",
                 "");
         return conn;
@@ -31,8 +31,7 @@ public class ProdutoDAO
     public static boolean Atualizar(Produto p)
     {
 
-        //boolean retorno = false;
-        if (ProdutoExiste(p.getId())) {
+        boolean retorno = false;
             try {
                 Connection Conexao = obterConexao();
 
@@ -43,7 +42,7 @@ public class ProdutoDAO
                         + "PRECO_COMPRA = ?, "
                         + "PRECO_VENDA = ?,"
                         + "QUANTIDADE = ?,"
-                        + "DISPONIVEL = ?,"
+                        + "DISPONIVEL = ? "
                         + "WHERE ID = " + p.getId());
 
                 Update.setString(1, p.getNome());
@@ -64,9 +63,55 @@ public class ProdutoDAO
             } catch (SQLException ex) {
                 Logger.getLogger(ProdutoDAO.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }
         return retorno;
 
+    }
+    
+    public static boolean updateCategoria(int idCategoria) throws SQLException {
+        boolean retorno = false;
+        
+        Connection connection = null;
+        try {
+            connection = obterConexao();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ProdutoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(ProdutoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        String queryId = "select max(id) from produto";
+
+        PreparedStatement stmt = connection.prepareStatement(queryId);
+
+        ResultSet rs = stmt.executeQuery();
+
+        rs.next();
+
+        int maxId = rs.getInt(1);
+        
+        
+
+        try {
+            PreparedStatement Create = connection.prepareStatement(
+                "INSERT INTO PRODUTOBD.PRODUTO_CATEGORIA ("
+                + "ID_PRODUTO,"
+                + "ID_CATEGORIA) "
+                + "VALUES (?, ?)");
+
+            Create.setInt(1, maxId);
+            Create.setInt(2, idCategoria);
+
+            int linhasAfetadas = Create.executeUpdate();
+
+            if (linhasAfetadas > 0) {
+                retorno = true;
+            }
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(ProdutoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return retorno;
     }
 
     public static boolean ProdutoExiste(int id)
@@ -95,8 +140,6 @@ public class ProdutoDAO
     public static boolean Excluir(int id)
     {
         boolean retorno = false;
-
-        if (ProdutoExiste(id)) {
             try {
                 System.out.println(id);
                 Connection Conexao = obterConexao();
@@ -116,7 +159,6 @@ public class ProdutoDAO
             } catch (SQLException ex) {
                 Logger.getLogger(ProdutoDAO.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }
         return retorno;
     }
     
@@ -128,7 +170,7 @@ public class ProdutoDAO
         "produto.id,\n" +
         "produto.nome, \n" +
         "produto.descricao,\n" +
-        "categoria.nome AS categoria,\n" +
+        "categoria.id AS categoria,\n" +
         "produto.preco_compra,\n" +
         "produto.preco_venda,\n" +
         "produto.quantidade,\n" +
@@ -150,7 +192,7 @@ public class ProdutoDAO
                 p.setNome(rs.getString("nome"));
                 p.setDescricao(rs.getString("descricao"));
                 p.setPrecoCompra(rs.getDouble("preco_compra"));
-                p.setCategoria(rs.getString("categoria"));
+                p.setCategoria(rs.getInt("categoria"));
                 p.setPrecoVenda(rs.getDouble("preco_venda"));
                 p.setDisponivel(rs.getInt("disponivel"));
                 p.setQuantidade(rs.getInt("quantidade"));
@@ -168,11 +210,18 @@ public class ProdutoDAO
         return listaProdutos;
     }
 
-    public static boolean Criar(Produto p) throws ClassNotFoundException, SQLException
+    public static boolean Criar(Produto p) 
     {
         boolean retorno = false;
 
-        Connection connection = obterConexao();
+        Connection connection = null;
+        try {
+            connection = obterConexao();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ProdutoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(ProdutoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
         try {
             PreparedStatement Create = connection.prepareStatement(
@@ -190,7 +239,7 @@ public class ProdutoDAO
             Create.setDouble(3, p.getPrecoCompra());
             Create.setDouble(4, p.getPrecoVenda());
             Create.setInt(5, p.getQuantidade());
-            Create.setBoolean(6, p.isDiponivel());
+            Create.setInt(6, p.isDisponivel());
 
             int linhasAfetadas = Create.executeUpdate();
 
