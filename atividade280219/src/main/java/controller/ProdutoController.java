@@ -12,11 +12,15 @@ import java.util.ArrayList;
 import model.Produto;
 
 public class ProdutoController {
+    
+    public static boolean updateCategoria(int idCategoria) {
+        return ProdutoDAO.updateCategoria(idCategoria);
+    }
 
-    public static boolean Salvar(String pNome, int pQuantidade, double pPrecoCompra, double pPrecoVenda,
-            int pIdCategoria, String pDescricao) {
-        Produto p = new Produto(pNome, pDescricao, pPrecoCompra, pPrecoVenda, pQuantidade);
-        return ProdutoDAO.Salvar(p);
+    public static boolean Salvar(String pNome, String pDescricao, double pPrecoCompra, double pPrecoVenda, int pQuantidade,
+            int pIdCategoria,  int pDisponivel) {
+        Produto p = new Produto(pNome, pDescricao, pPrecoCompra, pPrecoVenda, pQuantidade, pIdCategoria, pDisponivel);
+        return ProdutoDAO.Criar(p);
     }
 
     public static boolean Excluir(int id) {
@@ -27,22 +31,41 @@ public class ProdutoController {
     }
 
     public static ArrayList<String[]> getProdutos(String nome) {
-        ArrayList<Produto> produtos = ProdutoDAO.getProdutos(nome);
+        ArrayList<Produto> produtos;
+        if(nome == null) {
+            produtos = ProdutoDAO.getProdutos(null);
+        } else {
+            produtos = ProdutoDAO.getProdutos(nome);
+        }
+        
         ArrayList<String[]> listaProdutos = new ArrayList<>();
 
         for (int i = 0; i < produtos.size(); i++) {
             String disponivel;
+            String categoria = "";
             if(produtos.get(i).isDisponivel() == 1) {
                 disponivel = "Sim";
             } else {
                 disponivel = "Não";
             }
+            if(produtos.get(i).getCategoria() == 1) {
+                categoria = "Eletronicos";
+            } else if(produtos.get(i).getCategoria() == 2) {
+                categoria = "Higiene";
+            } else if(produtos.get(i).getCategoria() == 3) {
+                categoria = "Limpeza";
+            } else if(produtos.get(i).getCategoria() == 4) {
+                categoria = "Alimentos";
+            } else if(produtos.get(i).getCategoria() == 5) {
+                categoria = "Vestimenta";
+            }
+
             listaProdutos.add(
                 new String[]{
                     String.valueOf(produtos.get(i).getId()),
                     String.valueOf(produtos.get(i).getNome()),
                     String.valueOf(produtos.get(i).getDescricao()),
-                    String.valueOf(produtos.get(i).getCategoria()),
+                    String.valueOf(categoria),
                     String.valueOf(produtos.get(i).getPrecoCompra()),
                     String.valueOf(produtos.get(i).getPrecoVenda()),
                     String.valueOf(produtos.get(i).getQuantidade()),
@@ -64,17 +87,4 @@ public class ProdutoController {
         return ProdutoDAO.Atualizar(P);
     }
 
-    public static boolean Criar
-    (
-        String pNome,
-        int pQuantidade,
-        double pPrecoCompra,
-        double pPrecoVenda,
-        int pIdCategoria,
-        String pDescricao
-    ) throws ClassNotFoundException, SQLException {
-        Produto p = new Produto(pNome, pDescricao, pPrecoCompra, pPrecoVenda, pQuantidade);
-
-        return ProdutoDAO.Criar(p);
-    }
 }
